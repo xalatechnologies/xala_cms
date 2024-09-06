@@ -57,7 +57,12 @@ jobs:
             # Update the index.php in public folder to point to the current release
             sed -i 's#require __DIR__.\'/../vendor/autoload.php\';#require __DIR__.\'/../current/vendor/autoload.php\';#' /www/public/index.php &&
             sed -i 's#\$app = require_once __DIR__.\'/../bootstrap/app.php\';#\$app = require_once __DIR__.\'/../current/bootstrap/app.php\';#' /www/public/index.php &&
-            
+
+            # Check if the filesystem is read-only and remount as read-write if necessary
+            if mount | grep -q '/www.*ro'; then
+              sudo mount -o remount,rw /www;
+            fi
+
             # Symlink the new release to 'current'
             ln -nfs \$RELEASE_DIR /www/current &&
       
