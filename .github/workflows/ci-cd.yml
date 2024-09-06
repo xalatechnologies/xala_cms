@@ -32,30 +32,17 @@ jobs:
       
           # SSH into the server and run deployment commands
           ssh -i ~/.ssh/id_rsa xalatech.no@ssh.xalatech.no "
-            # Create the releases folder if it doesn't exist
-            mkdir -p /www/releases &&
-            
-            # Create a timestamped release folder
-            RELEASE_DIR=/www/releases/release_$(date +'%Y%m%d%H%M%S') &&
-            mkdir -p \$RELEASE_DIR &&
-            
+           
             # Clone the repo into the new release folder
-            git clone https://github.com/xalatechnologies/xala_cms.git \$RELEASE_DIR &&
+            git clone https://github.com/xalatechnologies/xala_cms.git \www\core &&
       
-            # Navigate into the release directory and install composer dependencies
-            cd \$RELEASE_DIR &&
+            # Navigate into the core directory and install composer dependencies
+            cd \www\core &&
             composer install --no-dev --no-interaction --optimize-autoloader &&
             
             # Copy the existing .env file to the new release
-            cp /www/.env \$RELEASE_DIR/.env &&
-      
-            # Ensure the storage folder is shared between releases
-            rm -rf \$RELEASE_DIR/storage &&
-            ln -s /www/storage \$RELEASE_DIR/storage &&
-      
-            # Symlink the new release to 'current'
-            ln -nfs \$RELEASE_DIR /www/current &&
-      
+            cp /www/.env \core/.env &&
+            
             # Check if the filesystem is read-only and skip changing permissions if necessary
             if mount | grep -q '/www.*ro'; then
               echo 'Cannot change ownership, read-only filesystem';
