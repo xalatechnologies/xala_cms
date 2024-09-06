@@ -20,9 +20,9 @@ jobs:
         with:
           php-version: 8.1
 
-      - name: Install Composer dependencies
+      - name: Copy Public folder to root
         run: composer install --prefer-dist --no-dev --no-interaction --optimize-autoloader
-      
+
       - name: Deploy to Server
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
@@ -32,4 +32,34 @@ jobs:
           echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H ssh.xalatech.no >> ~/.ssh/known_hosts
-          ssh -i ~/.ssh/id_rsa xalatech.no@ssh.xalatech.no "cd /www/ && git pull origin main && composer install"
+
+          # SSH into the server and run deployment commands
+          ssh -i ~/.ssh/id_rsa xalatech.no@ssh.xalatech.no "
+            # Navigate to /www/repo (the application folder)
+            mkdir -p /www/repo &&
+            cd /www/repo &&
+            
+            # Clean the repo and pull the latest changes
+            git reset --hard HEAD &&
+            git clean -fdx &&
+            git pull origin main &&
+
+            # Install composer dependencies
+            composer install --no-dev --no-interaction --optimize-autoloader &&
+
+            # Create the core folder and move non-public files into it
+            mkdir -p /www/core &&
+            rsync -av --progress --exclude='public' --exclude='.git' --exclude='.htaccess' /www/repo/ /www/core/ &&
+
+            # Copy the public folder contents to /www (root directory)
+            cp -r /www/repo/public/* /www/ &&
+
+            # Modify the index.php file to point to the core directory
+            sed -i 's#require __DIR__.\'/../vendor/autoload.php\';#require __DIR__.\'/core/vendor/autoload.php\';#' /www/index.php &&
+            sed -i 's#\$app = require_once __DIR__.\'/../bootstrap/app.php\';#\$app = require_once __DIR__.\'/core/bootstrap/app.php\';#' /www/index.php &&
+
+            # Set correct permissions for Laravel directories
+            chown -R www-data:www-data /www &&
+            chown -R www-data:www-data /www/core &&
+            chmod -R 755 /www
+          "
