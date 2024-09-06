@@ -125,9 +125,6 @@ if (!Helper::GeneralSiteSettings("style_subscribe")) {
                     &copy; <?php echo date("Y") ?> {{ __('frontend.AllRightsReserved') }}
                     . <a href="#">{{Helper::GeneralSiteSettings($site_title_var)}}</a>
                 </div>
-                <div class="credits">
-                    Powered by <a href="https://smartend.app">Smartend</a>
-                </div>
             </div>
             @include("frontEnd.layouts.social",["tt_position"=>"top"])
         </div>
