@@ -41,7 +41,7 @@ jobs:
             composer install --no-dev --no-interaction --optimize-autoloader &&
             
             # Copy the existing .env file to the new release
-            cp /www/.env \core/.env &&
+            cp /www/.env /www/core/.env &&
             
             # Check if the filesystem is read-only and skip changing permissions if necessary
             if mount | grep -q '/www.*ro'; then
