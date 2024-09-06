@@ -32,10 +32,4 @@ jobs:
           echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H ssh.xalatech.no >> ~/.ssh/known_hosts
-      
-          # SSH into the server and deploy to the /www/ directory
-          ssh -i ~/.ssh/id_rsa xalatech.no@ssh.xalatech.no "
-            cd /www || git clone git@github.com:username/repo.git /www && cd /www;
-            git pull origin main;
-            composer install --no-dev --no-interaction --optimize-autoloader;
-          "
+          ssh -i ~/.ssh/id_rsa xalatech.no@ssh.xalatech.no "cd / && git pull origin main && composer install"
