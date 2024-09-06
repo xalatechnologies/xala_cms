@@ -23,10 +23,10 @@ jobs:
         ports:
           - 3307:3306
         options: >
-          --health-cmd="mysqladmin ping --silent" 
-          --health-interval=10s 
-          --health-timeout=20s  # Increase the timeout
-          --health-retries=5    # Increase the number of retries
+          --health-cmd="mysqladmin ping --silent"
+          --health-interval=10s
+          --health-timeout=20s
+          --health-retries=5
 
     steps:
       - name: Checkout the repository
