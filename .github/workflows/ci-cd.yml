@@ -32,4 +32,4 @@ jobs:
           echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H ssh.xalatech.no >> ~/.ssh/known_hosts
-          ssh -i ~/.ssh/id_rsa xalatech.no@ssh.xalatech.no "cd / && git pull origin main && composer install"
+          ssh -i ~/.ssh/id_rsa xalatech.no@ssh.xalatech.no "cd /www/ && git pull origin main && composer install"
