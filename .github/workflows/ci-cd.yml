@@ -22,16 +22,14 @@ jobs:
 
       - name: Install Composer dependencies
         run: composer install --prefer-dist --no-dev --no-interaction --optimize-autoloader
-
-      - name: Copy .env.example to .env
-        run: cp .env.example .env
-
-      - name: Generate application key
-        run: php artisan key:generate
-
+      
       - name: Deploy to Server
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
         run: |
-          ssh -o StrictHostKeyChecking=no xalatech.no@ssh.xalatech.no "cd / && git pull origin main && composer install --no-dev && php artisan config:cache && php artisan route:cache && php artisan view:cache && php artisan queue:restart"
+          mkdir -p ~/.ssh
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H ssh.xalatech.no >> ~/.ssh/known_hosts
+          ssh -i ~/.ssh/id_rsa xalatech.no@ssh.xalatech.no "cd / && git pull origin main && composer install"
