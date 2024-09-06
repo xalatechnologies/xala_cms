@@ -58,15 +58,19 @@ jobs:
             sed -i 's#require __DIR__.\'/../vendor/autoload.php\';#require __DIR__.\'/../current/vendor/autoload.php\';#' /www/public/index.php &&
             sed -i 's#\$app = require_once __DIR__.\'/../bootstrap/app.php\';#\$app = require_once __DIR__.\'/../current/bootstrap/app.php\';#' /www/public/index.php &&
 
+            # Symlink the new release to 'current'
+            ln -nfs \$RELEASE_DIR /www/current &&
+
             # Check if the filesystem is read-only and remount as read-write if necessary
             if mount | grep -q '/www.*ro'; then
               sudo mount -o remount,rw /www;
             fi
 
-            # Symlink the new release to 'current'
-            ln -nfs \$RELEASE_DIR /www/current &&
-      
-            # Set correct permissions
-            chown -R xalatech.no:xalatech.no /www &&
-            chmod -R 755 /www
+            # Set correct permissions for Laravel directories
+            if [ ! $(mount | grep '/www.*ro') ]; then
+              chown -R xalatech.no:xalatech.no /www &&
+              chmod -R 755 /www;
+            else
+              echo 'Cannot change ownership, read-only filesystem';
+            fi
           "
