@@ -41,7 +41,7 @@ jobs:
             mkdir -p \$RELEASE_DIR &&
             
             # Clone the repo into the new release folder
-            git clone git@github.com:username/repo.git \$RELEASE_DIR &&
+            git clone https://github.com/xalatechnologies/xala_cms.git \$RELEASE_DIR &&
       
             # Navigate into the release directory and install composer dependencies
             cd \$RELEASE_DIR &&
