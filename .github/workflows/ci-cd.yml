@@ -32,12 +32,10 @@ jobs:
       
           # SSH into the server and run deployment commands
           ssh -i ~/.ssh/id_rsa xalatech.no@ssh.xalatech.no "
-           
-            # Clone the repo into the new release folder
-            git clone https://github.com/xalatechnologies/xala_cms.git \www\core &&
       
             # Navigate into the core directory and install composer dependencies
             cd \www\core &&
+            git fetch && git pull
             composer install --no-dev --no-interaction --optimize-autoloader &&
             
             # Copy the existing .env file to the new release
