@@ -37,4 +37,4 @@ jobs:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
         run: |
-          ssh -o StrictHostKeyChecking=no deploy@ssh.xalatech.no "cd / && git pull origin main && composer install --no-dev && php artisan migrate --force && php artisan config:cache && php artisan route:cache && php artisan view:cache && php artisan queue:restart"
+          ssh -o StrictHostKeyChecking=no xalatech.no@ssh.xalatech.no "cd / && git pull origin main && composer install --no-dev && php artisan migrate --force && php artisan config:cache && php artisan route:cache && php artisan view:cache && php artisan queue:restart"
