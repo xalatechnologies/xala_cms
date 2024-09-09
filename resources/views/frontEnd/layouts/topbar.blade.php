@@ -137,30 +137,20 @@
                     </span>
                 @endif
             @endif
-            @if(count(Helper::languagesList()) >1)
-                <div class="dropdown header-dropdown">
-                    <button class="btn dropdown-toggle" type="button" id="dropdownLangBtn"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                        @if(@Helper::currentLanguage()->icon !="")
-                            <img
-                                src="{{ asset('assets/dashboard/images/flags/'.@Helper::currentLanguage()->icon.".svg") }}"
-                                alt="{{ @Helper::currentLanguage()->title }}" loading="lazy">
-                        @endif
-                        {{ @Helper::currentLanguage()->title }}
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownLangBtn">
-                        @foreach(Helper::languagesList() as $ActiveLanguage)
-                            <a href="{{ Helper::languageURL($ActiveLanguage->code, @$page_type , @$page_id) }}"
-                               class="dropdown-item">
-                                @if($ActiveLanguage->icon !="")
-                                    <img
-                                        src="{{ asset('assets/dashboard/images/flags/'.$ActiveLanguage->icon.".svg") }}"
-                                        alt=" {{ $ActiveLanguage->title }}" loading="lazy">
-                                @endif
-                                {{ $ActiveLanguage->title }}
-                            </a>
-                        @endforeach
-                    </ul>
+            @if(count(Helper::languagesList()) > 1)
+                <div class="language-buttons">
+                    @foreach(Helper::languagesList() as $ActiveLanguage)
+                        <a href="{{ Helper::languageURL($ActiveLanguage->code, @$page_type , @$page_id) }}" 
+                        class="btn btn-language" 
+                        title="{{ $ActiveLanguage->title }}">
+                            @if($ActiveLanguage->icon != "")
+                                <img src="{{ asset('assets/dashboard/images/flags/'.$ActiveLanguage->icon.".svg") }}" 
+                                    alt="{{ $ActiveLanguage->title }}" 
+                                    loading="lazy" 
+                                    class="language-flag">
+                            @endif
+                        </a>
+                    @endforeach
                 </div>
             @endif
 
