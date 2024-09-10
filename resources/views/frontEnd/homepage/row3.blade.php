@@ -3,7 +3,7 @@ $StaffLimit = 6; // 0 = all
 $Staff = Helper::Topics(Helper::GeneralWebmasterSettings("home_content5_section_id"), 0, $StaffLimit, 1);
 ?>
 @if(count($Staff)>0)
-    <section id="staff" class="staff">
+    <section id="staff" class="staff bg-grey">
         <div class="container">
 
             <div class="section-title">
