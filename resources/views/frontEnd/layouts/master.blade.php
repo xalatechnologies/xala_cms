@@ -17,8 +17,8 @@
 </head>
 
 <body class="dir-{{ @Helper::currentLanguage()->direction }} lang-{{ @Helper::currentLanguage()->code }} {{ (!Helper::GeneralSiteSettings("style_change") && Helper::GeneralSiteSettings("style_type"))?"dark":"" }}">
-<!-- ======= Top Bar ======= -->
-@include('frontEnd.layouts.topbar')
+<!-- ======= Top Bar ======= 
+@include('frontEnd.layouts.topbar')-->
 
 <!-- ======= Header ======= -->
 @include('frontEnd.layouts.header')

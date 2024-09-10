@@ -4,7 +4,7 @@
     $MenuLinks = \App\Helpers\SiteMenu::List(Helper::GeneralWebmasterSettings("header_menu_id"));
     ?>
     @if(count($MenuLinks)>0)
-        <nav id="navbar" class="navbar order-last order-lg-0">
+        <nav id="navbar" class="navbar">
             <ul>
                 @foreach($MenuLinks as $MenuLink)
                     <li class="{{ (@$MenuLink->sub)?"dropdown":"" }}"><a
@@ -62,8 +62,22 @@
             <i class="bi bi-list mobile-nav-toggle"></i>
         </nav>
 
-
-        {{--        <a href="#appointment" class="appointment-btn scrollto"><span class="d-none d-md-inline">Make an</span> Appointment</a>--}}
-
+        @if(count(Helper::languagesList()) > 1)
+                <div class="language-buttons">
+                    @foreach(Helper::languagesList() as $ActiveLanguage)
+                        <a href="{{ Helper::languageURL($ActiveLanguage->code, @$page_type , @$page_id) }}" 
+                        class="btn btn-language" 
+                        title="{{ $ActiveLanguage->title }}">
+                            @if($ActiveLanguage->icon != "")
+                                <img src="{{ asset('assets/dashboard/images/flags/'.$ActiveLanguage->icon.".svg") }}" 
+                                    alt="{{ $ActiveLanguage->title }}" 
+                                    loading="lazy" 
+                                    class="language-flag">
+                            @endif
+                        </a>
+                    @endforeach
+                </div>
+            @endif
+        
     @endif
 @endif
