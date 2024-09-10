@@ -13,40 +13,47 @@ if (!Helper::GeneralSiteSettings("style_subscribe")) {
     $contacts_cols = 4;
 }
 ?>
-<footer id="footer" {!!  $footer_style !!}>
-    @if(Helper::GeneralSiteSettings("style_footer")==1)
-        <div class="footer-top">
-            <div class="container">
-                <div class="row">
+<!-- Footer Section -->
+<footer class="footer-section bg-black">
+    <div class="container">
+        <div class="row">
+            <!-- Logo and Description -->
+            <div class="col-md-5 footer-logo">
+                <img src="{{ URL::to('uploads/media/logo_white.svg') }}" alt="{{ Helper::GeneralSiteSettings("site_title_" . @Helper::currentLanguage()->code) }}">
+                <p class="footer-description">
+                    {{ Helper::GeneralSiteSettings("site_desc_" . @Helper::currentLanguage()->code) }}
+                </p>
+            </div>
 
-                    <div class="col-lg-{{ $contacts_cols }} col-md-12 footer-links">
-                        <div class="footer-title">
-                            <h4>{{ __('frontend.contactDetails') }}</h4>
-                        </div>
-                        @if(Helper::GeneralSiteSettings("contact_t1_" . @Helper::currentLanguage()->code) !="")
-                            <address>
-                                <strong>{{ __('frontend.address') }}</strong><br>
-                                <i class="bi bi-geo-alt"></i>
-                                &nbsp;{{ Helper::GeneralSiteSettings("contact_t1_" . @Helper::currentLanguage()->code) }}
-                            </address>
-                        @endif
-                        @if(Helper::GeneralSiteSettings("contact_t3") !="")
-                            <p>
-                                <strong>{{ __('frontend.callUs') }}</strong><br>
-                                <i class="bi bi-telephone"></i> &nbsp;<a
-                                    href="tel:{{ Helper::GeneralSiteSettings("contact_t3") }}"><span
-                                        dir="ltr">{{ Helper::GeneralSiteSettings("contact_t3") }}</span></a></p>
-                        @endif
-                        @if(Helper::GeneralSiteSettings("contact_t6") !="")
-                            <p>
-                                <strong>{{ __('frontend.email') }}</strong><br>
-                                <i class="bi bi-envelope"></i> &nbsp;<a
-                                    href="mailto:{{ Helper::GeneralSiteSettings("contact_t6") }}">{{ Helper::GeneralSiteSettings("contact_t6") }}</a>
-                            </p>
-                        @endif
-                    </div>
-                    @if(Helper::GeneralWebmasterSettings("footer_menu_id") >0)
-                        <?php
+            <!-- Contact Info -->
+            <div class="col-md-4 px-3 footer-contact">
+                <div class="contact-item">
+                    <i class="bi bi-telephone-fill"></i> {{ Helper::GeneralSiteSettings("contact_t3") }} | {{ Helper::GeneralSiteSettings("contact_t5") }}
+                </div>
+                <div class="contact-item">
+                    <i class="bi bi-envelope-fill"></i> {{ Helper::GeneralSiteSettings("contact_t6") }}
+                </div>
+                <div class="contact-item">
+                    <i class="bi bi-geo-alt-fill"></i> {{ Helper::GeneralSiteSettings("contact_t1_" . @Helper::currentLanguage()->code) }}
+                </div>
+                <div class="contact-item">
+                    <i class="bi bi-clock-fill"></i> {{ __('frontend.contactInformationOpeningHours') }}
+                </div>
+            </div>
+
+            <!-- Social Links -->
+            <div class="col-md-3 footer-social">
+                <p>{{ __('frontend.footerSocialMediaLinks') }}</p>
+                <a href="#"><i class="bi bi-twitter"></i></a>
+                <a href="#"><i class="bi bi-linkedin"></i></a>
+                <a href="#"><i class="bi bi-facebook"></i></a>
+            </div>
+        </div>
+
+        <!-- Footer Links -->
+        <div class="footer-bottom">
+            <ul class="footer-links">
+             <?php
                         // Get list of footer menu links by group Id
                         $MenuLinks = \App\Helpers\SiteMenu::List(Helper::GeneralWebmasterSettings("footer_menu_id"));
                         $max_menu_cols = 2;
@@ -55,93 +62,29 @@ if (!Helper::GeneralSiteSettings("style_subscribe")) {
                         }
                         $mi = 0;
                         ?>
-                        @if(count($MenuLinks) == $max_menu_cols)
-                            @foreach($MenuLinks as $MenuLink)
-                                <div class="col-lg-{{($mi==0)?3:2}} col-md-6 footer-links">
-                                    <div class="footer-title">
-                                        <h4>{{ @$MenuLink->title }}</h4>
-                                    </div>
-                                    @if(@$MenuLink->sub)
-                                        <ul>
-                                            @foreach($MenuLink->sub as $SubLink)
-                                                <li><a class="nav-link" href="{{ @$SubLink->url }}"
-                                                       target="{{ @$SubLink->target }}">{!! (@$SubLink->icon)?"<i class='".@$SubLink->icon."'></i> ":"" !!} {{ @$SubLink->title }}
-                                                    </a>
-                                                </li>
-                                                @if(@$SubLink->sub)
-                                                    @foreach($SubLink->sub as $SubLink2)
-                                                        <li><a
-                                                                class="nav-link"
-                                                                href="{{ @$SubLink2->url }}"
-                                                                target="{{ @$SubLink2->target }}">
-                                                                &nbsp;&nbsp; {!! (@Helper::currentLanguage()->direction=="rtl")?"&#8617;":"&#8618;" !!} {!! (@$SubLink2->icon)?"<i class='".@$SubLink2->icon."'></i> ":"" !!} {{ @$SubLink2->title }}</a>
-                                                        </li>
-                                                    @endforeach
-                                                @endif
-                                            @endforeach
-                                        </ul>
-                                    @endif
-                                </div>
-                                @php($mi++)
-                            @endforeach
-                        @elseif(count($MenuLinks) > $max_menu_cols)
-                            <div class="col-lg-3 col-md-6 footer-links">
-                                <div class="footer-title">
-                                    <h4>{{ __('frontend.quickLinks') }}</h4>
-                                </div>
-                                <ul>
-                                    @foreach($MenuLinks as $MenuLink)
-                                        <li><a class="nav-link" href="{{ @$MenuLink->url }}"
-                                               target="{{ @$MenuLink->target }}">{!! (@$MenuLink->icon)?"<i class='".@$MenuLink->icon."'></i> ":"" !!} {{ @$MenuLink->title }}
-                                            </a>
-                                        </li>
-                                        @if(@$MenuLink->sub)
-                                            @foreach($MenuLink->sub as $SubLink)
-                                                <li><a
-                                                        class="nav-link"
-                                                        href="{{ @$SubLink->url }}"
-                                                        target="{{ @$SubLink->target }}">
-                                                        &nbsp;&nbsp; {!! (@Helper::currentLanguage()->direction=="rtl")?"&#8617;":"&#8618;" !!} {!! (@$SubLink->icon)?"<i class='".@$SubLink->icon."'></i> ":"" !!} {{ @$SubLink->title }}</a>
-                                                </li>
-                                            @endforeach
-                                        @endif
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
-                    @endif
-                    @include('frontEnd.layouts.subscribe')
-                </div>
+                @foreach($MenuLinks as $MenuLink)
+                                <li><a href="{{ @$SubLink->url }}" target="{{ @$SubLink->target }}">{{ @$MenuLink->title }}</a></li>
+
+                @endforeach
+            </ul>
+            <div class="footer-copyright">
+                © 2000-2024, All Rights Reserved
             </div>
-        </div>
-    @endif
-    <div class="footer-bottom">
-        <div class="container d-md-flex py-4">
-            <div class="me-md-auto text-center text-md-start">
-                <div class="copyright">
-                    <?php
-                    $site_title_var = "site_title_" . @Helper::currentLanguage()->code;
-                    ?>
-                    &copy; <?php echo date("Y") ?> {{ __('frontend.AllRightsReserved') }}
-                    . <a href="#">{{Helper::GeneralSiteSettings($site_title_var)}}</a>
-                </div>
-            </div>
-            @include("frontEnd.layouts.social",["tt_position"=>"top"])
         </div>
     </div>
 </footer>
+
 @if(Helper::GeneralSiteSettings('social_link10'))
-    <a href="https://wa.me/{{Helper::GeneralSiteSettings('social_link10')}}" class="whatsapp_float" target="_blank"  aria-label="Whatsapp"
-       rel="noopener noreferrer">
-        <i class="fa fa-whatsapp"></i>
-    </a>
+<a href="https://wa.me/{{Helper::GeneralSiteSettings('social_link10')}}" class="whatsapp_float" target="_blank" aria-label="Whatsapp" rel="noopener noreferrer">
+    <i class="fa fa-whatsapp"></i>
+</a>
 @endif
 @if (@Auth::check())
-    @if(!Helper::GeneralSiteSettings("site_status"))
-        <div class="text-center alert alert-warning m-0">
-            <div class="h6 mb-0">
-                {{__('backend.websiteClosedForVisitors')}}
-            </div>
-        </div>
-    @endif
+@if(!Helper::GeneralSiteSettings("site_status"))
+<div class="text-center alert alert-warning m-0">
+    <div class="h6 mb-0">
+        {{__('backend.websiteClosedForVisitors')}}
+    </div>
+</div>
+@endif
 @endif
