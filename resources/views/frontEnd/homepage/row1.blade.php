@@ -127,7 +127,12 @@ $TextBanners = Helper::BannersList(Helper::GeneralWebmasterSettings("home_text_b
             </div>
             @endforeach
 
-            <a href="/contact" class="btn cta-button cta-button-primary mt-4">{{ __('frontend.getintouch') }}</a>
+        <div class="row mt-5">
+            <div class="col text-center">
+                <a href="/contact" class="btn cta-button cta-button-primary mt-4">{{ __('frontend.getintouch') }}</a>
+            </div>
+        </div>
+
         </div>
 </section>
 
