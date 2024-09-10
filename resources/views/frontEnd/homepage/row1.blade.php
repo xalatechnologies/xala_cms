@@ -24,8 +24,8 @@ $page_form = @$HomePage->form;
 @endif
 <?php
 $ClientsLimit = 6; // 0 = all
-$Clients = Helper::Topics(Helper::GeneralWebmasterSettings("home_content3_section_id"), 0, $ClientsLimit, 1);
-$TextBanners = Helper::BannersList(Helper::GeneralWebmasterSettings("home_text_banners_section_id"));
+$Clients = Helper::Topics(9, 0, $ClientsLimit, 1);
+$TextBanners = Helper::Topics(2, 0, $ClientsLimit, 1);
 ?>
 @if(count($Clients)>0)
 <!-- Client Logos Section -->
@@ -51,7 +51,7 @@ $TextBanners = Helper::BannersList(Helper::GeneralWebmasterSettings("home_text_b
 
 
 @if(count($TextBanners)>0)
-@foreach($TextBanners->slice(0,1) as $TextBanner)
+@foreach($TextBanners as $TextBanner)
 <?php
         try {
             $TextBanner_type = $TextBanner->webmasterBanner->type;

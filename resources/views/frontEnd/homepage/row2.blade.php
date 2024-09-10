@@ -28,14 +28,17 @@ $Portfolios = Helper::Topics(4, 0, $PortfoliosLimit, 1);
             <?php
                     if ($Portfolio->$title_var != "") {
                         $title = $Portfolio->$title_var;
+                        $details = $Portfolio->$details_var;
                     } else {
                         $title = $Portfolio->$title_var2;
+                        $details = $Portfolio->$details_var2;
                     }
 
                     ?>
             <div class="col-12 col-md-6 col-lg-4 mb-4">
                 <div class="project-card">
                     <img src="{{ URL::to('uploads/topics/'.$Portfolio->photo_file) }}" alt="Ecommerce Store" class="img-fluid project-img">
+                    <p>{{ $details }}</p>
                     <div class="project-content">
                         <div>
                             <h5 class="project-title">{{ $title }}</h5>
