@@ -32,7 +32,7 @@ $TextBanners = Helper::BannersList(Helper::GeneralWebmasterSettings("home_text_b
 <section class="client-logos-section py-3 bg-green">
     <div class="container">
         <div class="row justify-content-center align-items-center text-center">
-            @foreach($Clients as $Client)
+            @foreach($Clients->sortBy('id') as $Client)
             <?php
                         if ($Client->$title_var != "") {
                             $title = $Client->$title_var;
@@ -89,7 +89,7 @@ $TextBanners = Helper::BannersList(Helper::GeneralWebmasterSettings("home_text_b
         <p class="services-subtitle mb-5">{{ __('frontend.servicesMsg') }}</p>
 
         <div class="row justify-content-center">
-            @foreach($TextBanners as $TextBanner)
+            @foreach($TextBanners->sortBy('id') as $TextBanner)
             <?php
                     if ($TextBanner->$title_var != "") {
                         $BTitle = $TextBanner->$title_var;

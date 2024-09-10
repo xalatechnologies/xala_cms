@@ -15,7 +15,7 @@ $Technologies = Helper::Topics(16, 0, $TechnologiesLimit, 1);
 
         <!-- Tools Cards Grid -->
         <div class="row tools-grid">
-            @foreach($Technologies as $Technology)
+            @foreach($Technologies->sortBy('id') as $Technology)
             <?php
                     if ($Technology->$title_var != "") {
                         $title = $Technology->$title_var;

@@ -24,7 +24,7 @@ $Portfolios = Helper::Topics(4, 0, $PortfoliosLimit, 1);
 
         <!-- Projects Grid -->
         <div class="row">
-            @foreach($Portfolios as $Portfolio)
+            @foreach($Portfolios->sortBy('id') as $Portfolio)
             <?php
                     if ($Portfolio->$title_var != "") {
                         $title = $Portfolio->$title_var;
@@ -53,7 +53,7 @@ $Portfolios = Helper::Topics(4, 0, $PortfoliosLimit, 1);
             </div>
             @endforeach
         </div>
-        
+
         <!-- View All Button -->
         <div class="row mt-5">
             <div class="col text-center">

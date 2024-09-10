@@ -15,7 +15,7 @@ $Staff = Helper::Topics(Helper::GeneralWebmasterSettings("home_content5_section_
                 <?php
                 $section_url = "";
                 ?>
-                @foreach($Staff as $Topic)
+                @foreach($Staff->sortBy('id') as $Topic)
                     <?php
                     if ($Topic->$title_var != "") {
                         $title = $Topic->$title_var;
