@@ -1,83 +1,65 @@
 <?php
-$HomeTopicsLimit = 12; // 0 = all
-$HomeTopics = Helper::Topics(Helper::GeneralWebmasterSettings("home_content1_section_id"), 0, $HomeTopicsLimit);
-$require_mp3_player = 0;
+$PortfoliosLimit = 12; ; // 0 = all
+$Portfolios = Helper::Topics(4, 0, $PortfoliosLimit, 1);
 ?>
-@if(count($HomeTopics)>0)
-    <section class="section-bg">
-
-        <div class="container">
-
-            <div class="section-title">
-                <h2>{{ __('frontend.homeContents1Title') }}</h2>
-                <p>{{ __('frontend.homeContents1desc') }}</p>
+@if(count($Portfolios)>0)
+<!-- Work For Our Clients Section -->
+<section class="work-section py-5">
+    <div class="container">
+        <!-- Section Heading: Badge on one line, Title and Arrows on the next -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <!-- Our Work Badge on the first line -->
+                <span class="badge badge-tag mb-3">{{ __('frontend.homeContents2Title') }}</span>
             </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div id="owl-slider" class="owl-carousel owl-theme listing">
-                        <?php
-                        $section_url = "";
-                        ?>
-                        @foreach($HomeTopics as $Topic)
-                            <?php
-                            if ($Topic->$title_var != "") {
-                                $title = $Topic->$title_var;
-                            } else {
-                                $title = $Topic->$title_var2;
-                            }
-                            if ($Topic->$details_var != "") {
-                                $details = $details_var;
-                            } else {
-                                $details = $details_var2;
-                            }
-                            if ($section_url == "") {
-                                $section_url = Helper::sectionURL($Topic->webmaster_id);
-                            }
-                            $topic_link_url = Helper::topicURL($Topic->id,"",$Topic);
-                            $HomeSectionType = @$Topic->webmasterSection->type;
-                            if (!@$require_mp3_player && $HomeSectionType == 3) {
-                                $require_mp3_player = 1;
-                            }
-                            ?>
-                            <div class="item">
-                                @include("frontEnd.topic.card",["Topic"=>$Topic])
-                            </div>
-                        @endforeach
-
-                    </div>
+            <div class="col-12 d-flex justify-content-between align-items-center">
+                <!-- Title on the left and Pagination Arrows on the right -->
+                <h2 class="work-title mb-0">{{ __('frontend.homeContents2desc') }}</h2>
+                <div class="d-flex">
+                    <button class="btn btn-slider me-2"><i class="bi bi-arrow-left"></i></button>
+                    <button class="btn btn-slider"><i class="bi bi-arrow-right"></i></button>
                 </div>
             </div>
-
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="more-btn">
-                        <a href="{{ url($section_url) }}" class="btn btn-theme"><i
-                                class="fa fa-angle-left"></i>&nbsp; {{ __('frontend.viewMore') }}
-                            &nbsp;<i
-                                class="fa fa-angle-right"></i></a>
-                    </div>
-                </div>
-            </div>
-
         </div>
-    </section>
-    @if ($require_mp3_player)
-        @push('before-styles')
-            <link rel="stylesheet"
-                  href="{{ URL::asset('assets/frontend/vendor/green-audio-player/css/green-audio-player.min.css') }}?v={{ Helper::system_version() }}"/>
-        @endpush
-        @push('after-scripts')
-            <script
-                src="{{ URL::asset('assets/frontend/vendor/green-audio-player/js/green-audio-player.min.js') }}?v={{ Helper::system_version() }}"></script>
-            <script>
-                document.addEventListener('DOMContentLoaded', function () {
-                    GreenAudioPlayer.init({
-                        selector: '.audio-player',
-                        stopOthersOnPlay: true,
-                        showTooltips: true,
-                    });
-                });
-            </script>
-        @endpush
-    @endif
+
+        <!-- Projects Grid -->
+        <div class="row">
+            @foreach($Portfolios as $Portfolio)
+            <?php
+                    if ($Portfolio->$title_var != "") {
+                        $title = $Portfolio->$title_var;
+                    } else {
+                        $title = $Portfolio->$title_var2;
+                    }
+
+                    ?>
+            <div class="col-12 col-md-6 col-lg-4 mb-4">
+                <div class="project-card">
+                    <img src="{{ URL::to('uploads/topics/'.$Portfolio->photo_file) }}" alt="Ecommerce Store" class="img-fluid project-img">
+                    <div class="project-content">
+                        <div>
+                            <h5 class="project-title">{{ $title }}</h5>
+                            <div class="project-tags">
+                                @foreach($Portfolio->tags as $PortfolioTag)
+                                <span class="badge tag">{{ $PortfolioTag->$title }}</span>
+                                @endforeach
+                            </div>
+                        </div>
+                        <a href="#" class="arrow-link">
+                            <i class="bi bi-arrow-up-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+        </div>
+        
+        <!-- View All Button -->
+        <div class="row mt-5">
+            <div class="col text-center">
+                <a href="/portfolio" class="btn cta-button cta-button-primary"> {{ __('frontend.viewMore') }}</a>
+            </div>
+        </div>
+    </div>
+</section>
 @endif
