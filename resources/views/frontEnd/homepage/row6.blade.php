@@ -3,7 +3,7 @@ $TestimonialsLimit = 0; // 0 = all
 $Testimonials = Helper::Topics(Helper::GeneralWebmasterSettings("home_content6_section_id"), 0, $TestimonialsLimit, 1);
 ?>
 @if(count($Testimonials)>0)
-    <section id="testimonials" class="testimonials">
+    <section id="testimonials" class="testimonials bg-light-green">
         <div class="container">
             <div class="section-title">
                 <h2>{{ __('frontend.homeTestimonialsTitle') }}</h2>
