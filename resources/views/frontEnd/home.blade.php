@@ -1,7 +1,6 @@
 @extends('frontEnd.layouts.master')
 
 @section('content')
-    <div class="home-page">
         <?php
         $title_var = "title_" . @Helper::currentLanguage()->code;
         $title_var2 = "title_" . config('smartend.default_language');
@@ -19,7 +18,6 @@
         @include('frontEnd.homepage.row7')
 
         @include('frontEnd.layouts.popup',['Popup'=>@$Popup])
-    </div>
 @endsection
 @push('after-styles')
     @if(Helper::GeneralSiteSettings("style_header") && Helper::GeneralSiteSettings("style_bg_type"))
