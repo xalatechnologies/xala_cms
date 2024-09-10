@@ -1,73 +1,135 @@
-<?php
-$HomePartnersLimit = 0; ; // 0 = all
-$HomePartners = Helper::Topics(Helper::GeneralWebmasterSettings("home_content3_section_id"), 0, $HomePartnersLimit, 1);
-?>
-@if(count($HomePartners)>0)
-    <section id="partners" class="partners section-bg">
+ <!-- Contact Us Section -->
+    <section class="contact-us-section bg-grey py-5">
         <div class="container">
-            <div class="section-title">
-                <h2>{{ __('frontend.partners') }}</h2>
-                <p>{{ __('frontend.partnersMsg') }}</p>
+            <!-- Section Title -->
+            <div class="row mb-5">
+                <div class="col-12 text-center">
+                    <h2 class="contact-title">{{ __('frontend.contactTitle') }}</h2>
+                    <p class="contact-subtitle">{{ __('frontend.contactDescription') }} </p>
+                </div>
             </div>
-            <div class="partners-slider swiper" data-aos="fade-up" data-aos-delay="100">
-                <div class="swiper-wrapper">
-                    <?php
-                    $ii = 0;
-                    $title_var = "title_" . @Helper::currentLanguage()->code;
-                    $title_var2 = "title_" . config('smartend.default_language');
-                    $details_var = "details_" . @Helper::currentLanguage()->code;
-                    $details_var2 = "details_" . config('smartend.default_language');
-                    $section_url = "";
-                    ?>
 
-                    @foreach($HomePartners as $HomePartner)
-                        <?php
-                        if ($HomePartner->$title_var != "") {
-                            $title = $HomePartner->$title_var;
-                        } else {
-                            $title = $HomePartner->$title_var2;
-                        }
-
-                        if ($section_url == "") {
-                            $section_url = Helper::sectionURL($HomePartner->webmaster_id);
-                        }
-                        $URL = "";
-                        if (count($HomePartner->fields) > 0) {
-                            foreach ($HomePartner->fields as $t_field) {
-                                if ($t_field->field_value != "") {
-                                    if (@filter_var($t_field->field_value, FILTER_VALIDATE_URL)) {
-                                        $URL = $t_field->field_value;
-                                    }
-                                }
-                            }
-                        }
-                        ?>
-                        <div class="swiper-slide">
-                            <div class="thumbnail">
-                                @if($URL !="")
-                                    <a href="{{ $URL }}" target="_blank">
-                                        <img
-                                            src="{{ URL::to('uploads/topics/'.$HomePartner->photo_file) }}"
-                                            data-bs-toggle="tooltip"
-                                            data-bs-placement="bottom" title="{{ $title }}" width="100%" height="100%"  loading="lazy"
-                                            alt="{{ $title }}">
-                                    </a>
-                                @else
-                                    <img
-                                        src="{{ URL::to('uploads/topics/'.$HomePartner->photo_file) }}"
-                                        data-bs-toggle="tooltip"
-                                        data-bs-placement="bottom" title="{{ $title }}"  width="100%" height="100%"  loading="lazy"
-                                        alt="{{ $title }}">
-                                @endif
+            <!-- Contact Form & Info Section -->
+            <div class="row align-items-stretch contact-us-row g-0">
+                <!-- Contact Form -->
+                <div class="col-lg-6">
+                        {{Form::open(['route'=>['contactPageSubmit'],'method'=>'POST','class'=>'php-email-form contact-form p-5 bg-white h-100 rounded','id'=>'contactForm'])}}
+                        <div class="row">
+                            <div class="col-md-12 form-group">
+                                {!! Form::text('contact_name',"", array('placeholder' => __('frontend.yourName'),'class' => 'form-control','id'=>'contact_name','required'=>'required')) !!}
+                            </div>
+                            <div class="col-md-12 form-group mt-3 mt-md-0">
+                                {!! Form::email('contact_email',"", array('placeholder' => __('frontend.yourEmail'),'class' => 'form-control','id'=>'contact_email','required'=>'required')) !!}
+                            </div>
+                            <div class="col-md-12 form-group mt-3 mt-md-0">
+                                {!! Form::text('contact_phone',"", array('placeholder' => __('frontend.phone'),'class' => 'form-control','id'=>'contact_phone','required'=>'required')) !!}
                             </div>
                         </div>
-                        <?php
-                        $ii++;
-                        ?>
-                    @endforeach
+                        <div class="form-group mt-3">
+                            {!! Form::text('contact_subject',"", array('placeholder' => __('frontend.subject'),'class' => 'form-control','id'=>'contact_subject','required'=>'required')) !!}
+                        </div>
+                        <div class="form-group mt-3">
+                            {!! Form::textarea('contact_message','', array('placeholder' => __('frontend.message'),'class' => 'form-control','id'=>'contact_message','rows'=>'10','required'=>'required')) !!}
+                        </div>
+
+                        @if(config('smartend.nocaptcha_status'))
+                            <div class="form-group mb-3">
+                                {!! NoCaptcha::renderJs(@Helper::currentLanguage()->code) !!}
+                                {!! NoCaptcha::display() !!}
+                            </div>
+                        @endif
+                        <div class="submit-message"></div>
+                        <div>
+                            <button type="submit" id="contactFormSubmit" class="btn btn-lg cta-button cta-button-primary"><i
+                                    class="fa-solid fa-paper-plane"></i> {{ __('frontend.sendMessage') }}</button>
+                        </div>
+                        {{Form::close()}}
                 </div>
-                <div class="swiper-pagination"></div>
+
+                <!-- Contact Information -->
+                <div class="col-lg-6">
+                    <div class="contact-info d-flex flex-column bg-dark-green justify-content-between h-100">
+                        <div class="contact-info-header">
+                            <h3>{{ __('frontend.contactInformationTitle') }}</h3>
+                            <p>{{ __('frontend.contactInformationDescription') }}</p>
+
+                            <div class="contact-info-labels mt-4 py-3">
+                                <ul class="contact-details">
+                                    <li><i class="bi bi-telephone"></i> {{ Helper::GeneralSiteSettings("contact_t3") }} | {{ Helper::GeneralSiteSettings("contact_t5") }}</li>
+                                    <li><i class="bi bi-envelope"></i> {{ Helper::GeneralSiteSettings("contact_t6") }} </li>
+                                    <li><i class="bi bi-geo-alt"></i> {{ Helper::GeneralSiteSettings("contact_t1_" . @Helper::currentLanguage()->code) }}</li>
+                                    <li><i class="bi bi-clock"></i> {{ __('frontend.contactInformationOpeningHours') }}</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="contact-info-footer">
+                            <div class="social-icons mt-4">
+                                <a href="#"><i class="bi bi-facebook"></i></a>
+                                <a href="#"><i class="bi bi-twitter"></i></a>
+                                <a href="#"><i class="bi bi-instagram"></i></a>
+                                <a href="#"><i class="bi bi-linkedin"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
-@endif
+                @include("frontEnd.topic.maps")
+
+@push('after-scripts')
+     <script type="text/javascript">
+        $(document).ready(function () {
+            $('#contactForm').submit(function (evt) {
+                evt.preventDefault();
+                let btn = $('#contactFormSubmit');
+                btn.html("<img src=\"{{ asset('assets/dashboard/images/loading.gif') }}\" style=\"height: 20px\"/> {!! __('frontend.sendMessage') !!}");
+                btn.prop('disabled', true);
+                var formData = new FormData(this);
+                $.ajax({
+                    type: "POST",
+                    url: "{{ route("contactPageSubmit") }}",
+                    data: formData,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success: function (result) {
+                        let stat = 'alert-danger';
+                        if (result.stat === 'success') {
+                            stat = 'alert-success';
+                            $('#contactForm')[0].reset();
+                        }
+                        let confirm = '<div class="alert ' + stat + ' alert-dismissible fade show mt-3" role="alert">' + result.msg + '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
+                        $("#contactForm .submit-message").html(confirm);
+                        btn.html('<i class="fa-solid fa-paper-plane"></i> {!! __('frontend.sendMessage') !!}');
+                        btn.prop('disabled', false);
+                    }
+                });
+                return false;
+            });
+        });
+
+        var iti = window.intlTelInput(document.querySelector("#contact_phone"), {
+            showSelectedDialCode: true,
+            countrySearch: true,
+            initialCountry: "auto",
+            separateDialCode: true,
+            hiddenInput: function() {
+                return {
+                    phone: "contact_phone_full",
+                    country: "contact_phone_country_code"
+                };
+            },
+            geoIpLookup: function (callback) {
+                $.get('https://ipinfo.io', function () {
+                }, "jsonp").always(function (resp) {
+                    var countryCode = (resp && resp.country) ? resp.country : "us";
+                    callback(countryCode.toLowerCase());
+                    iti.setCountry(countryCode.toLowerCase());
+                });
+            },
+            utilsScript: "{{ URL::asset('assets/frontend/vendor/intl-tel-input/js/utils.js') }}?v={{ Helper::system_version() }}",
+        });
+    </script>
+@endpush

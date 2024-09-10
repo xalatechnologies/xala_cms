@@ -1,8 +1,7 @@
 @extends('frontEnd.layouts.master')
 
 @section('content')
-    <div>
-        <?php
+ <?php
         $title_var = "title_" . @Helper::currentLanguage()->code;
         $title_var2 = "title_" . config('smartend.default_language');
         $details_var = "details_" . @Helper::currentLanguage()->code;
@@ -28,202 +27,31 @@
             $section = "";
         }
         ?>
-        <section class="breadcrumbs">
-            <div class="container">
-
-                <div class="d-flex justify-content-between align-items-center">
-                    <h2>{{ $title }}</h2>
-                    <ol>
-                        <li><a href="{{ Helper::homeURL() }}">{{ __("backend.home") }}</a></li>
-                        <li>{{ $title }}</li>
-                    </ol>
+     
+ <!-- Contact Us Section -->
+    <section class="contact-us-section bg-grey py-5">
+        <div class="container">
+            <!-- Section Title -->
+            <div class="row mb-5">
+                <div class="col-12 text-center">
+                    <h2 class="contact-title">{{ $title }}</h2>
+                    <p class="contact-subtitle">{{ $details }}</p>
                 </div>
-
-            </div>
-        </section>
-
-        <section id="contact" class="contact">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <article class="mb-5">
-                            @if($WebmasterSection->type==2 && $Topic->video_file!="")
-                                {{--video--}}
-                                <div class="post-video">
-                                    <div class="video-container">
-                                        @if($Topic->video_type ==1)
-                                            <?php
-                                            $Youtube_id = Helper::Get_youtube_video_id($Topic->video_file);
-                                            ?>
-                                            @if($Youtube_id !="")
-                                                {{-- Youtube Video --}}
-                                                <iframe allowfullscreen
-                                                        src="https://www.youtube.com/embed/{{ $Youtube_id }}">
-                                                </iframe>
-                                            @endif
-                                        @elseif($Topic->video_type ==2)
-                                            <?php
-                                            $Vimeo_id = Helper::Get_vimeo_video_id($Topic->video_file);
-                                            ?>
-                                            @if($Vimeo_id !="")
-                                                {{-- Vimeo Video --}}
-                                                <iframe allowfullscreen
-                                                        src="https://player.vimeo.com/video/{{ $Vimeo_id }}?title=0&amp;byline=0">
-                                                </iframe>
-                                            @endif
-
-                                        @else
-                                            <video width="100%" height="300" controls>
-                                                <source src="{{ URL::to('uploads/topics/'.$Topic->video_file) }}"
-                                                        type="video/mp4">
-                                                Your browser does not support the video tag.
-                                            </video>
-                                        @endif
-
-
-                                    </div>
-                                </div>
-                            @elseif($WebmasterSection->type==3 && $Topic->audio_file!="")
-                                {{--audio--}}
-                                <div class="post-video">
-                                    <div class="video-container">
-                                        <audio controls>
-                                            <source src="{{ URL::to('uploads/topics/'.$Topic->audio_file) }}"
-                                                    type="audio/mpeg">
-                                            Your browser does not support the audio element.
-                                        </audio>
-
-                                    </div>
-                                </div>
-
-                            @elseif(count($Topic->photos)>0)
-                                {{--photo slider--}}
-                                <div class="post-slider">
-                                    <!-- start flexslider -->
-                                    <div id="post-slider" class="flexslider">
-                                        <ul class="slides">
-                                            @if($Topic->photo_file !="")
-                                                <li>
-                                                    <img src="{{ URL::to('uploads/topics/'.$Topic->photo_file) }}"
-                                                         alt="{{ $title }}"/>
-                                                </li>
-                                            @endif
-                                            @foreach($Topic->photos as $photo)
-                                                <li>
-                                                    <img src="{{ URL::to('uploads/topics/'.$photo->file) }}"
-                                                         alt="{{ $photo->title  }}"/>
-                                                </li>
-                                            @endforeach
-
-                                        </ul>
-                                    </div>
-                                    <!-- end flexslider -->
-                                </div>
-
-                            @else
-                                {{--one photo--}}
-                                <div class="post-image">
-                                    @if($Topic->photo_file !="")
-                                        <img src="{{ URL::to('uploads/topics/'.$Topic->photo_file) }}"
-                                             alt="{{ $title }}"/>
-                                    @endif
-                                </div>
-                            @endif
-
-                            {!! $Topic->$details !!}
-                            @if($Topic->attach_file !="")
-                                <?php
-                                $file_ext = strrchr($Topic->attach_file, ".");
-                                $file_ext = strtolower($file_ext);
-                                ?>
-                                <div class="bottom-article">
-                                    @if($file_ext ==".jpg"|| $file_ext ==".jpeg"|| $file_ext ==".png"|| $file_ext ==".gif")
-                                        <div class="text-center">
-                                            <img src="{{ URL::to('uploads/topics/'.$Topic->attach_file) }}"
-                                                 alt="{{ $title }}"/>
-                                        </div>
-                                    @else
-                                        <a href="{{ URL::to('uploads/topics/'.$Topic->attach_file) }}">
-                                            <strong><i class="fa fa-paperclip"></i>
-                                                &nbsp;{{ __('frontend.downloadAttach') }}</strong>
-                                        </a>
-                                    @endif
-                                </div>
-                            @endif
-
-                            @include("frontEnd.topic.files")
-                        </article>
-                    </div>
-                </div>
-                @include("frontEnd.topic.maps")
             </div>
 
-            <div class="container">
-                <div class="row">
-
-                    <div class="col-lg-4">
-                        <h3 class="sub-title">{{ __('frontend.contactDetails') }}</h3>
-                        <div class="info">
-                            @if(Helper::GeneralSiteSettings("contact_t1_" . @Helper::currentLanguage()->code) !="")
-                                <div class="address">
-                                    <i class="bi bi-geo-alt"></i>
-                                    <h4>{{ __('frontend.address') }}:</h4>
-                                    <p>{{ Helper::GeneralSiteSettings("contact_t1_" . @Helper::currentLanguage()->code) }}</p>
-                                </div>
-                            @endif
-                            @if(Helper::GeneralSiteSettings("contact_t3") !="")
-                                <div class="phone">
-                                    <i class="bi bi-telephone"></i>
-                                    <h4>{{ __('frontend.callPhone') }}:</h4>
-                                    <p><span
-                                            dir="ltr">{{ Helper::GeneralSiteSettings("contact_t3") }}</span></p>
-                                </div>
-                            @endif
-                            @if(Helper::GeneralSiteSettings("contact_t5") !="")
-                                <div class="phone">
-                                    <i class="bi bi-telephone"></i>
-                                    <h4>{{ __('frontend.callMobile') }}:</h4>
-                                    <p><span
-                                            dir="ltr">{{ Helper::GeneralSiteSettings("contact_t5") }}</span></p>
-                                </div>
-                            @endif
-                            @if(Helper::GeneralSiteSettings("contact_t4") !="")
-                                <div class="phone">
-                                    <i class="fa fa-fax"></i>
-                                    <h4>{{ __('frontend.callFax') }}:</h4>
-                                    <p><span
-                                            dir="ltr">{{ Helper::GeneralSiteSettings("contact_t4") }}</span></p>
-                                </div>
-                            @endif
-                            @if(Helper::GeneralSiteSettings("contact_t6") !="")
-                                <div class="email">
-                                    <i class="bi bi-envelope"></i>
-                                    <h4>{{ __('frontend.email') }}:</h4>
-                                    <p>{{ Helper::GeneralSiteSettings("contact_t6") }}</p>
-                                </div>
-                            @endif
-                            @if(Helper::GeneralSiteSettings("contact_t7_" . @Helper::currentLanguage()->code) !="")
-                                <div class="email">
-                                    <i class="bi bi-clock"></i>
-                                    <h4>{{ __('frontend.callTimes') }}:</h4>
-                                    <p>{{ Helper::GeneralSiteSettings("contact_t7_" . @Helper::currentLanguage()->code) }}</p>
-                                </div>
-                            @endif
-                        </div>
-
-                    </div>
-
-                    <div class="col-lg-8 mt-5 mt-lg-0" id="contact-form-container">
-                        <h3 class="sub-title">{{ __('frontend.getInTouch') }}</h3>
-                        {{Form::open(['route'=>['contactPageSubmit'],'method'=>'POST','class'=>'php-email-form','id'=>'contactForm'])}}
+            <!-- Contact Form & Info Section -->
+            <div class="row align-items-stretch contact-us-row g-0">
+                <!-- Contact Form -->
+                <div class="col-lg-6">
+                        {{Form::open(['route'=>['contactPageSubmit'],'method'=>'POST','class'=>'php-email-form contact-form p-5 bg-white h-100 rounded','id'=>'contactForm'])}}
                         <div class="row">
-                            <div class="col-md-4 form-group">
+                            <div class="col-md-12 form-group">
                                 {!! Form::text('contact_name',"", array('placeholder' => __('frontend.yourName'),'class' => 'form-control','id'=>'contact_name','required'=>'required')) !!}
                             </div>
-                            <div class="col-md-4 form-group mt-3 mt-md-0">
+                            <div class="col-md-12 form-group mt-3 mt-md-0">
                                 {!! Form::email('contact_email',"", array('placeholder' => __('frontend.yourEmail'),'class' => 'form-control','id'=>'contact_email','required'=>'required')) !!}
                             </div>
-                            <div class="col-md-4 form-group mt-3 mt-md-0">
+                            <div class="col-md-12 form-group mt-3 mt-md-0">
                                 {!! Form::text('contact_phone',"", array('placeholder' => __('frontend.phone'),'class' => 'form-control','id'=>'contact_phone','required'=>'required')) !!}
                             </div>
                         </div>
@@ -242,18 +70,44 @@
                         @endif
                         <div class="submit-message"></div>
                         <div>
-                            <button type="submit" id="contactFormSubmit" class="btn btn-lg btn-theme"><i
+                            <button type="submit" id="contactFormSubmit" class="btn btn-lg cta-button cta-button-primary"><i
                                     class="fa-solid fa-paper-plane"></i> {{ __('frontend.sendMessage') }}</button>
                         </div>
                         {{Form::close()}}
-
-                    </div>
-
                 </div>
 
+                <!-- Contact Information -->
+                <div class="col-lg-6">
+                    <div class="contact-info d-flex flex-column bg-dark-green justify-content-between h-100">
+                        <div class="contact-info-header">
+                            <h3>{{ __('frontend.contactInformationTitle') }}</h3>
+                            <p>{{ __('frontend.contactInformationDescription') }}</p>
+
+                            <div class="contact-info-labels mt-4 py-3">
+                                <ul class="contact-details">
+                                    <li><i class="bi bi-telephone"></i> {{ Helper::GeneralSiteSettings("contact_t3") }} | {{ Helper::GeneralSiteSettings("contact_t5") }}</li>
+                                    <li><i class="bi bi-envelope"></i> {{ Helper::GeneralSiteSettings("contact_t6") }} </li>
+                                    <li><i class="bi bi-geo-alt"></i> {{ Helper::GeneralSiteSettings("contact_t1_" . @Helper::currentLanguage()->code) }}</li>
+                                    <li><i class="bi bi-clock"></i> {{ __('frontend.contactInformationOpeningHours') }}</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="contact-info-footer">
+                            <div class="social-icons mt-4">
+                                <a href="#"><i class="bi bi-facebook"></i></a>
+                                <a href="#"><i class="bi bi-twitter"></i></a>
+                                <a href="#"><i class="bi bi-instagram"></i></a>
+                                <a href="#"><i class="bi bi-linkedin"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </section>
-    </div>
+        </div>
+    </section>
+                @include("frontEnd.topic.maps")
+
     @include('frontEnd.layouts.popup',['Popup'=>@$Popup])
 @endsection
 
