@@ -8,38 +8,59 @@ $page_form = @$HomePage->form;
 ?>
 @if(!empty($HomePage))
 @if(@$HomePage->$details_var !="")
-<section class="content-row-no-bg home-welcome">
-    <div class="container">
-        {!! @$HomePage->$details_var !!}
-        @if(!empty($page_form))
-        <?php
+{!! @$HomePage->$details_var !!}
+@if(!empty($page_form))
+<?php
         $form_url = Helper::sectionURL($page_form->id);
         ?>
-        <div class="text-center mt-3">
-            <a href="{{ $form_url }}" class="btn btn-lg btn-primary">
-                <i class="fa-solid fa-send-o"></i> {{ __('backend.submit') }} {!!  $page_form->{"title_".@Helper::currentLanguage()->code} !!}
-            </a>
-        </div>
-        @endif
-    </div>
-</section>
+<div class="text-center mt-3">
+    <a href="{{ $form_url }}" class="btn btn-lg btn-primary">
+        <i class="fa-solid fa-send-o"></i> {{ __('backend.submit') }} {!! $page_form->{"title_".@Helper::currentLanguage()->code} !!}
+    </a>
+</div>
+@endif
 @endif
 @endif
 @endif
 <?php
+$ClientsLimit = 6; // 0 = all
+$Clients = Helper::Topics(Helper::GeneralWebmasterSettings("home_content3_section_id"), 0, $ClientsLimit, 1);
 $TextBanners = Helper::BannersList(Helper::GeneralWebmasterSettings("home_text_banners_section_id"));
 ?>
+@if(count($Clients)>0)
+<!-- Client Logos Section -->
+<section class="client-logos-section py-3 bg-light-green">
+    <div class="container">
+        <div class="row justify-content-center align-items-center text-center">
+            @foreach($Clients as $Client)
+            <?php
+                        if ($Client->$title_var != "") {
+                            $title = $Client->$title_var;
+                        } else {
+                            $title = $Client->$title_var2;
+                        }
+                        ?>
+            <div class="col-6 col-md-3 col-lg-2">
+                <img src="{{ URL::to('uploads/topics/'.$Client->photo_file) }}" class="client-logo img-fluid" data-bs-toggle="tooltip" data-bs-placement="bottom" title="{{ $title }}" loading="lazy" alt="{{ $title }}">
+            </div>
+            @endforeach
+        </div>
+    </div>
+</section>
+@endif
+
+
 @if(count($TextBanners)>0)
-    @foreach($TextBanners->slice(0,1) as $TextBanner)
-        <?php
+@foreach($TextBanners->slice(0,1) as $TextBanner)
+<?php
         try {
             $TextBanner_type = $TextBanner->webmasterBanner->type;
         } catch (Exception $e) {
             $TextBanner_type = 0;
         }
         ?>
-    @endforeach
-    <?php
+@endforeach
+<?php
     $title_var = "title_" . @Helper::currentLanguage()->code;
     $title_var2 = "title_" . config('smartend.default_language');
     $details_var = "details_" . @Helper::currentLanguage()->code;
@@ -59,11 +80,17 @@ $TextBanners = Helper::BannersList(Helper::GeneralWebmasterSettings("home_text_b
         $col_width = 3;
     }
     ?>
-    <section id="services" class="services">
-        <div class="container">
-            <div class="row">
-                @foreach($TextBanners as $TextBanner)
-                    <?php
+
+<!-- Our Services Section -->
+<section class="services-section py-5 bg-grey position-relative">
+    <div class="background-design"></div>
+    <div class="container text-center">
+        <h2 class="services-title mb-4">{{ __('frontend.services') }}</h2>
+        <p class="services-subtitle mb-5">{{ __('frontend.servicesMsg') }}</p>
+
+        <div class="row justify-content-center">
+            @foreach($TextBanners as $TextBanner)
+            <?php
                     if ($TextBanner->$title_var != "") {
                         $BTitle = $TextBanner->$title_var;
                     } else {
@@ -80,37 +107,28 @@ $TextBanners = Helper::BannersList(Helper::GeneralWebmasterSettings("home_text_b
                         $BFile = $TextBanner->$file_var2;
                     }
                     ?>
-                    <div class="col-lg-{{$col_width}} col-md-6 d-flex align-items-stretch mb-3">
-                        <div class="icon-box">
-                            @if($TextBanner->code !="")
-                                {!! $TextBanner->code !!}
-                            @else
 
-                                @if($TextBanner->$link_var !="")
-                                    <a href="{!! $TextBanner->$link_var !!}">
-                                        @endif
-                                        @if($TextBanner->icon !="")
-                                            <div class="icon">
-                                                <i class="fa {{$TextBanner->icon}} fa-3x"></i>
-                                            </div>
-                                        @elseif($BFile !="")
-                                            <img src="{{ URL::to('uploads/banners/'.$BFile) }}" loading="lazy"
-                                                 alt="{{ $BTitle }}"/>
-                                        @endif
-                                        <h2>{!! $BTitle !!}</h2>
-                                        @if($BDetails !="")
-                                            <p>{!! nl2br($BDetails) !!}</p>
-                                        @endif
-                                        @if($TextBanner->$link_var !="")
-                                    </a>
-                                @endif
-
-                            @endif
-                        </div>
+            <div class="col-12 col-md-6 col-lg-4 mb-4 d-flex">
+                <div class="service-card p-4 flex-grow-1">
+                    @if($TextBanner->icon !="")
+                    <div class="icon">
+                        <i class="fa {{$TextBanner->icon}} fa-3x"></i>
                     </div>
-                @endforeach
+                    @elseif($BFile !="")
+                    <img src="{{ URL::to('uploads/banners/'.$BFile) }}" loading="lazy" alt="{{ $BTitle }}" />
+                    @endif
+                    <h5 class="service-title mt-3">{!! $BTitle !!}</h5>
+                    <p class="service-description mt-2">
+                        @if($BDetails !="")
+                        {!! nl2br($BDetails) !!}
+                        @endif
+                    </p>
+                </div>
             </div>
+            @endforeach
 
+            <a href="/contact" class="btn cta-button cta-button-primary mt-4">{{ __('frontend.getintouch') }}</a>
         </div>
-    </section>
+</section>
+
 @endif
