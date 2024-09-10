@@ -29,7 +29,7 @@ $TextBanners = Helper::BannersList(Helper::GeneralWebmasterSettings("home_text_b
 ?>
 @if(count($Clients)>0)
 <!-- Client Logos Section -->
-<section class="client-logos-section py-3 bg-light-green">
+<section class="client-logos-section py-3 bg-green">
     <div class="container">
         <div class="row justify-content-center align-items-center text-center">
             @foreach($Clients as $Client)
