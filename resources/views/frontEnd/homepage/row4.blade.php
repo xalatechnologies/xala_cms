@@ -1,67 +1,46 @@
 <?php
-$HomePhotosLimit = 12; ; // 0 = all
-$HomePhotos = Helper::Topics(Helper::GeneralWebmasterSettings("home_content2_section_id"), 0, $HomePhotosLimit, 1);
+$TechnologiesLimit = 12; ; // 0 = all
+$Technologies = Helper::Topics(16, 0, $TechnologiesLimit, 1);
 ?>
-@if(count($HomePhotos)>0)
-    <section id="gallery" class="gallery">
-        <div class="container">
-
-            <div class="section-title">
-                <h2>{{ __('frontend.homeContents2Title') }}</h2>
-                <p>{{ __('frontend.homeContents2desc') }}</p>
+@if(count($Technologies)>0)
+<section class="tools-section py-5 bg-light-green">
+    <div class="container">
+        <!-- Section Title -->
+        <div class="row mb-4 text-center">
+            <div class="col-12">
+                <h2 class="tools-title">{{ __('frontend.technologiesTitle') }}</h2>
+                <p class="tools-subtitle">{{ __('frontend.technologiesdesc') }}</p>
             </div>
         </div>
 
-        <div class="container-fluid">
-            <div class="row g-0 mb-2">
-                <?php
-                $section_url = "";
-                $ph_count = 0;
-                ?>
-                @foreach($HomePhotos as $HomePhoto)
-                    <?php
-                    if ($HomePhoto->$title_var != "") {
-                        $title = $HomePhoto->$title_var;
+        <!-- Tools Cards Grid -->
+        <div class="row tools-grid">
+            @foreach($Technologies as $Technology)
+            <?php
+                    if ($Technology->$title_var != "") {
+                        $title = $Technology->$title_var;
                     } else {
-                        $title = $HomePhoto->$title_var2;
-                    }
-
-                    if ($section_url == "") {
-                        $section_url = Helper::sectionURL($HomePhoto->webmaster_id);
+                        $title = $Technology->$title_var2;
                     }
                     ?>
-                    @foreach($HomePhoto->photos as $photo)
-                        @if($ph_count<$HomePhotosLimit)
-                            <div class="col-lg-3 col-md-4">
-                                <div class="gallery-item">
-                                    <a href="{{ URL::to('uploads/topics/'.$photo->file) }}"
-                                       class="galelry-lightbox" title="{{ $title }}">
-                                        <img src="{{ URL::to('uploads/topics/'.$photo->file) }}" width="100%" height="210"  loading="lazy"
-                                             alt="{{ $title }}" class="img-fluid">
-                                    </a>
-                                </div>
-                            </div>
-                        @else
-                            @break
-                        @endif
-                        <?php
-                        $ph_count++;
-                        ?>
-                    @endforeach
-                @endforeach
 
+            <div class="col-6 col-md-4 col-lg-2 mb-4">
+                <div class="tool-card text-center p-3">
+                    <img src="{{ URL::to('uploads/topics/'.$Technology->photo_file) }}" alt="{{ $title }}" class="img-fluid tool-logo mb-2">
+                    <p class="tool-label">{{ $title }}</p>
+                </div>
             </div>
-            <div class="row mt-3">
-                <div class="col-lg-12">
-                    <div class="more-btn">
-                        <a href="{{ url($section_url) }}" class="btn btn-theme"><i
-                                class="fa fa-angle-left"></i>&nbsp; {{ __('frontend.viewMore') }}
-                            &nbsp;<i
-                                class="fa fa-angle-right"></i></a>
-                    </div>
+            @endforeach
+        </div>
+        <div class="row mt-3">
+            <div class="col-lg-12">
+                <div class="more-btn">
+                    <a href="/technologies" class="btn btn-theme"><i class="fa fa-angle-left"></i>&nbsp; {{ __('frontend.viewMore') }}
+                        &nbsp;<i class="fa fa-angle-right"></i></a>
                 </div>
             </div>
         </div>
-    </section>
-@endif
+    </div>
+</section>
 
+@endif
