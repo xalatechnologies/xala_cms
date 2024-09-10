@@ -10,11 +10,11 @@ $Portfolios = Helper::Topics(4, 0, $PortfoliosLimit, 1);
         <div class="row mb-4">
             <div class="col-12">
                 <!-- Our Work Badge on the first line -->
-                <span class="badge badge-tag mb-3">{{ __('frontend.homeContents2Title') }}</span>
+                <span class="badge badge-tag mb-3">{{ __('frontend.ourWork') }}</span>
             </div>
             <div class="col-12 d-flex justify-content-between align-items-center">
                 <!-- Title on the left and Pagination Arrows on the right -->
-                <h2 class="work-title mb-0">{{ __('frontend.homeContents2desc') }}</h2>
+                <p class="mb-0">{{ __('frontend.ourWorkDesc') }}</p>
                 <div class="d-flex">
                     <button class="btn btn-slider me-2"><i class="bi bi-arrow-left"></i></button>
                     <button class="btn btn-slider"><i class="bi bi-arrow-right"></i></button>

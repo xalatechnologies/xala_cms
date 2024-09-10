@@ -1,6 +1,6 @@
 <?php
 $TestimonialsLimit = 0; // 0 = all
-$Testimonials = Helper::Topics(Helper::GeneralWebmasterSettings("home_content6_section_id"), 0, $TestimonialsLimit, 1);
+$Testimonials = Helper::Topics(11, 0, $TestimonialsLimit, 1);
 ?>
 @if(count($Testimonials)>0)
     <section id="testimonials" class="testimonials bg-light-green">

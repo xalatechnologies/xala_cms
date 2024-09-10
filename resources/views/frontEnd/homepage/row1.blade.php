@@ -26,6 +26,7 @@ $page_form = @$HomePage->form;
 $ClientsLimit = 6; // 0 = all
 $Clients = Helper::Topics(9, 0, $ClientsLimit, 1);
 $TextBanners = Helper::Topics(2, 0, $ClientsLimit, 1);
+$Technologies = Helper::Topics(16, 0, $ClientsLimit, 1);
 ?>
 @if(count($Clients)>0)
 <!-- Client Logos Section -->
@@ -118,11 +119,6 @@ $TextBanners = Helper::Topics(2, 0, $ClientsLimit, 1);
                     <img src="{{ URL::to('uploads/banners/'.$BFile) }}" loading="lazy" alt="{{ $BTitle }}" />
                     @endif
                     <h5 class="service-title mt-3">{!! $BTitle !!}</h5>
-                    <p class="service-description mt-2">
-                        @if($BDetails !="")
-                        {!! nl2br($BDetails) !!}
-                        @endif
-                    </p>
                 </div>
             </div>
             @endforeach

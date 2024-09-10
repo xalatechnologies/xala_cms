@@ -77,6 +77,19 @@ return [
     'homeFAQDesc' => 'Find clear answers to common questions and past inquiries, Clear answers to common curiosities.',
     'cookiesAcceptMessage' => 'By using this website you accept our cookies and agree to our privacy policy, including cookie policy.',
     'cookiesAcceptBtn' => 'Accept Cookies',
-
+    'getintouch' => 'Get in touch',
+    'services' => 'Our Core Services',
+    'servicesMsg' => 'Integrate Design, Technology, and Business Thinking for scalable solutions.',
+    'technologiesTitle' => 'Tools and Technologies We Work On',
+    'technologiesdesc' => 'Our expertise in these renowned technologies powers your business.',
+    'homeProcessTitle' => 'Our Work Process Model',
+    'ourWork' => 'Case Studies',
+    'ourWorkDesc' => 'Discover Our Recent Assignments Through Case Studies',
+    'contactTitle' => 'Get in-touch',
+    'contactDescription' => 'Effortlessly hire expert design, development, and marketing teams tailored to your project requirements, exactly when you need them.',
+    'contactInformationTitle' => 'Contact Information',
+    'contactInformationDescription' => 'Have questions or need assistance? Start a live chat with us now and get immediate support!',
+    'contactInformationOpeningHours' => 'Monday to Friday 08:00 AM to 05:00 PM',
+    'footerSocialMediaLinks' => 'Connect with us',
 ];
 ?>
