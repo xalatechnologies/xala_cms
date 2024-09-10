@@ -1,73 +1,56 @@
 <?php
-$FAQLimit = 10; // 0 = all
-$FAQs = Helper::Topics(Helper::GeneralWebmasterSettings("home_content7_section_id"), 0, $FAQLimit, 1);
-$half = round(count($FAQs)/2);
-$FAQs1 = @$FAQs->slice(0,$half);
-$FAQs2 = @$FAQs->slice($half,$half);
+$ProcessLimit = 10; // 0 = all
+$Processes = Helper::Topics(17, 0, $ProcessLimit, 1);
 ?>
-@if(count($FAQs)>0)
-    <section id="faq" class="faq">
-        <div class="container">
-            <div class="section-title">
-                <h2>{{ __('frontend.homeFAQTitle') }}</h2>
-                <p>{{ __('frontend.homeFAQDesc') }}</p>
+@if(count($Processes)>0)
+<!-- Process Model Section similar to Agile Software Model -->
+<section class="agile-process-section bg-grey py-5">
+    <div class="container text-center">
+        <!-- Section Title -->
+        <div class="row mb-5">
+            <div class="col-12">
+                <h2 class="agile-process-title">{{ __('frontend.homeProcessTitle') }}</h2>
             </div>
+        </div>
 
-            <div class="accordion">
-                <div class="row">
-                    <?php
-                    $i = 0;
-                    $section_url = "";
+        <!-- Process Steps -->
+        <div class="row justify-content-center align-items-center agile-steps">
+            <?php
+                    $ii = 1;
                     ?>
-                    <div class="col-lg-6 col-sm-12">
-                        <div class="row">
-                            @foreach($FAQs1 as $Topic)
-                                <?php
-                                if ($i == 2) {
-                                    echo "</div><div class='row'>";
-                                    $i = 0;
-                                }
-                                $i++;
 
-                                if ($section_url == "") {
-                                    $section_url = Helper::sectionURL($Topic->webmaster_id);
-                                }
-                                ?>
-                                @include("frontEnd.topic.accordion",["Topic"=>$Topic,"CatId"=>0])
-                            @endforeach
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-sm-12">
-                        <div class="row">
-                            @foreach($FAQs2 as $Topic)
-                                <?php
-                                if ($i == 2) {
-                                    echo "</div><div class='row'>";
-                                    $i = 0;
-                                }
-                                $i++;
+            @foreach($Processes->sortBy('id') as $Process)
+            <?php
+                    if ($Process->$title_var != "") {
+                        $title = $Process->$title_var;
+                        $desc = $Process->$details_var;
+                    } else {
+                        $title = $Process->$title_var2;
+                        $desc = $Process->$details_var2;
+                    }  
+                    ?>
 
-                                if ($section_url == "") {
-                                    $section_url = Helper::sectionURL($Topic->webmaster_id);
-                                }
-                                ?>
-                                @include("frontEnd.topic.accordion",["Topic"=>$Topic,"CatId"=>0])
-                            @endforeach
-                        </div>
-                    </div>
+            <div class="col-12 col-md-3 text-center mb-4">
+                <div class="agile-step">
+                    <div class="step-circle step-circle-blue">{{ $ii }}</div>
+                    <h5 class="step-title">{{ $title }}</h5>
+                    <p class="step-description">{{ $desc }}</p>
                 </div>
             </div>
-            <div class="row mt-3">
-                <div class="col-lg-12">
-                    <div class="more-btn">
-                        <a href="{{ url($section_url) }}" class="btn btn-theme"><i
-                                class="fa fa-angle-left"></i>&nbsp; {{ __('frontend.viewMore') }}
-                            &nbsp;<i
-                                class="fa fa-angle-right"></i></a>
-                    </div>
-                </div>
+
+            <!-- Arrow between steps -->
+            @if($ii != 3 and $ii != 6)
+            <div class="col-12 col-md-1 text-center d-none d-md-block">
+                <i class="bi bi-arrow-right process-arrow"></i>
             </div>
+            @endif
+            <?php
+                        $ii++;
+                        ?>
+            @endforeach
 
         </div>
-    </section>
+    </div>
+</section>
+
 @endif
