@@ -8,14 +8,14 @@
             <div class="form-group">
                 <label>{!!  __('backend.websiteTitle') !!}
                 </label> {!! @Helper::languageName($ActiveLanguage) !!}
-                {!! Form::text('site_title_'.@$ActiveLanguage->code,$Setting->{'site_title_'.@$ActiveLanguage->code}, array('placeholder' => '','class' => 'form-control','maxlength'=>191, 'dir'=>@$ActiveLanguage->direction)) !!}
+                {!! Form::text('site_title_'.@$ActiveLanguage->code,$Setting->{'site_title_'.@$ActiveLanguage->code}, array('placeholder' => '','class' => 'form-control','maxlength'=>500, 'dir'=>@$ActiveLanguage->direction)) !!}
             </div>
         @endforeach
         @foreach(Helper::languagesList() as $ActiveLanguage)
             <div class="form-group">
                 <label>{!!  __('backend.metaDescription') !!}
                 </label> {!! @Helper::languageName($ActiveLanguage) !!}
-                {!! Form::textarea('site_desc_'.@$ActiveLanguage->code,$Setting->{'site_desc_'.@$ActiveLanguage->code}, array('placeholder' => '','class' => 'form-control','maxlength'=>191, 'dir'=>@$ActiveLanguage->direction,'rows'=>'2')) !!}
+                {!! Form::textarea('site_desc_'.@$ActiveLanguage->code,$Setting->{'site_desc_'.@$ActiveLanguage->code}, array('placeholder' => '','class' => 'form-control','maxlength'=>500, 'dir'=>@$ActiveLanguage->direction,'rows'=>'2')) !!}
             </div>
         @endforeach
         @foreach(Helper::languagesList() as $ActiveLanguage)
