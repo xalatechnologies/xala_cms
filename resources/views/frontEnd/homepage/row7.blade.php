@@ -2,7 +2,7 @@
     <section class="contact-us-section bg-grey py-5">
         <div class="container">
             <!-- Section Title -->
-            <div class="row mb-5">
+            <div class="row">
                 <div class="col-12 text-center">
                     <h2 class="contact-title">{{ __('frontend.contactTitle') }}</h2>
                     <p class="contact-subtitle">{{ __('frontend.contactDescription') }} </p>

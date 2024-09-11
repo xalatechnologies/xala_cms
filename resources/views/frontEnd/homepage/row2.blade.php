@@ -37,14 +37,21 @@ $Portfolios = Helper::Topics(4, 0, $PortfoliosLimit, 1);
                     ?>
             <div class="col-12 col-md-6 col-lg-4 mb-4">
                 <div class="project-card">
-                    <img src="{{ URL::to('uploads/topics/'.$Portfolio->photo_file) }}" alt="Ecommerce Store" class="img-fluid project-img">
-                    <p>{{ $details }}</p>
-                    <div class="project-content">
+                    <img src="{{ URL::to('uploads/topics/'.$Portfolio->photo_file) }}" alt="{{ $title }}" class="img-fluid project-img">
+                    <div class="card-content p-3">
                         <div>
-                            <h5 class="project-title">{{ $title }}</h5>
+                            <h4>{{ $title }}</h4>
+                            <p>{{ $details }}</p>
                             <div class="project-tags">
                                 @foreach($Portfolio->tags as $PortfolioTag)
-                                <span class="badge tag">{{ $PortfolioTag->$title }}</span>
+                                 <?php
+                                 $PortfolioTaged = Helper::Tag($PortfolioTag->tag_id);
+
+                   
+                    ?>
+                    @if($PortfolioTaged != null)
+                                    <span class="badge tag mb-1">{{ $PortfolioTaged->title }}</span>
+                                    @endif
                                 @endforeach
                             </div>
                         </div>

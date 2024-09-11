@@ -22,21 +22,22 @@ $Technologies = Helper::Topics(16, 0, $TechnologiesLimit, 1);
                     } else {
                         $title = $Technology->$title_var2;
                     }
+
+                     $url = $Technology->seo_url_slug_en;
                     ?>
 
-            <div class="col-6 col-md-4 col-lg-2 mb-4">
+            <a href="{{ "/technologies/".$url }}" class="col-6 col-md-4 col-lg-2 mb-4">
                 <div class="tool-card text-center p-3">
                     <img src="{{ URL::to('uploads/topics/'.$Technology->photo_file) }}" alt="{{ $title }}" class="img-fluid tool-logo mb-2">
                     <p class="tool-label">{{ $title }}</p>
                 </div>
-            </div>
+            </a>
             @endforeach
         </div>
         <div class="row mt-3">
             <div class="col-lg-12">
                 <div class="more-btn">
-                    <a href="/technologies" class="btn btn-theme"><i class="fa fa-angle-left"></i>&nbsp; {{ __('frontend.viewMore') }}
-                        &nbsp;<i class="fa fa-angle-right"></i></a>
+                    <a href="/contact" class="btn cta-button cta-button-primary"> {{ __('frontend.getintouch') }}</a>
                 </div>
             </div>
         </div>

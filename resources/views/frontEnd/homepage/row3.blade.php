@@ -66,16 +66,7 @@ $Staff = Helper::Topics(Helper::GeneralWebmasterSettings("home_content5_section_
 
             </div>
 
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="more-btn">
-                        <a href="{{ url($section_url) }}" class="btn btn-theme"><i
-                                class="fa fa-angle-left"></i>&nbsp; {{ __('frontend.viewMore') }}
-                            &nbsp;<i
-                                class="fa fa-angle-right"></i></a>
-                    </div>
-                </div>
-            </div>
+            
         </div>
     </section>
 @endif

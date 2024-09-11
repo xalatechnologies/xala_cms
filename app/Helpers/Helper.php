@@ -1019,6 +1019,11 @@ class Helper
         return $Topics;
     }
 
+    static function Tag($id)
+    {
+        return Tag::where([['status', 1]])->find($id);
+    }
+
     static function colorHexToRGB($color, $opacity = 1): string
     {
         $color = str_replace("#", "", $color);

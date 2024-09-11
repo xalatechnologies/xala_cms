@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col-lg-12">
             <br>
-            <h4><i class="fa-solid fa-cart-plus"></i> {{ __('frontend.orderForm') }}
+            <h4><i class="fa-solid fa-cart-plus"></i> {{ __('frontend.getintouch') }}
             </h4>
             <div class="bottom-article">
                 {{Form::open(['route'=>['orderSubmit'],'method'=>'POST','class'=>'orderForm','id'=>'orderForm'])}}

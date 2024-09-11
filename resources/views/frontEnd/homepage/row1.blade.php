@@ -107,10 +107,12 @@ $Technologies = Helper::Topics(16, 0, $ClientsLimit, 1);
                     } else {
                         $BFile = $TextBanner->$file_var2;
                     }
+
+                    $url = $TextBanner->seo_url_slug_en;
                     ?>
 
             <div class="col-12 col-md-6 col-lg-4 mb-4 d-flex">
-                <div class="service-card p-4 flex-grow-1">
+                <a href="{{ "/services/".$url }}" class="service-card p-4 flex-grow-1"> 
                     @if($TextBanner->icon !="")
                     <div class="icon">
                         <i class="fa {{$TextBanner->icon}} fa-3x"></i>
@@ -119,7 +121,7 @@ $Technologies = Helper::Topics(16, 0, $ClientsLimit, 1);
                     <img src="{{ URL::to('uploads/banners/'.$BFile) }}" loading="lazy" alt="{{ $BTitle }}" />
                     @endif
                     <h5 class="service-title mt-3">{!! $BTitle !!}</h5>
-                </div>
+                </a>
             </div>
             @endforeach
 
