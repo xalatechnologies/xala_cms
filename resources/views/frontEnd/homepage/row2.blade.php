@@ -14,7 +14,7 @@ $Portfolios = Helper::Topics(4, 0, $PortfoliosLimit, 1);
             </div>
             <div class="col-12 d-flex justify-content-between align-items-center">
                 <!-- Title on the left and Pagination Arrows on the right -->
-                <p class="mb-0">{{ __('frontend.ourWorkDesc') }}</p>
+                <p class="mb-0 section-subtitle">{{ __('frontend.ourWorkDesc') }}</p>
                 <div class="d-flex">
                     <button class="btn btn-slider me-2"><i class="bi bi-arrow-left"></i></button>
                     <button class="btn btn-slider"><i class="bi bi-arrow-right"></i></button>

@@ -4,8 +4,8 @@
             <!-- Section Title -->
             <div class="row">
                 <div class="col-12 text-center">
-                    <h2 class="contact-title">{{ __('frontend.contactTitle') }}</h2>
-                    <p class="contact-subtitle">{{ __('frontend.contactDescription') }} </p>
+                    <h2 class="section-title">{{ __('frontend.contactTitle') }}</h2>
+                    <p class="section-subtitle mb-5">{{ __('frontend.contactDescription') }} </p>
                 </div>
             </div>
 

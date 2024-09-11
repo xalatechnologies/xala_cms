@@ -18,6 +18,7 @@
 <link rel="stylesheet" href="{{ URL::asset('assets/frontend/vendor/owl-carousel/assets/owl.theme.default.min.css') }}?v={{ Helper::system_version() }}">
 
 <link href="{{ URL::asset('assets/frontend/css/style.css') }}?v={{ Helper::system_version() }}" rel="stylesheet"/>
+<link href="{{ URL::asset('assets/frontend/css/custom.css') }}?v={{ Helper::system_version() }}" rel="stylesheet"/>
 
 
 @if( @Helper::currentLanguage()->direction=="rtl")

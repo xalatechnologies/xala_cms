@@ -9,7 +9,7 @@ $Technologies = Helper::Topics(16, 0, $TechnologiesLimit, 1);
         <div class="row mb-4 text-center">
             <div class="col-12">
                 <h2 class="tools-title">{{ __('frontend.technologiesTitle') }}</h2>
-                <p class="tools-subtitle">{{ __('frontend.technologiesdesc') }}</p>
+                <p class="section-subtitle">{{ __('frontend.technologiesdesc') }}</p>
             </div>
         </div>
 

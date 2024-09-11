@@ -4,12 +4,9 @@ $Staff = Helper::Topics(Helper::GeneralWebmasterSettings("home_content5_section_
 ?>
 @if(count($Staff)>0)
     <section id="staff" class="staff bg-grey">
-        <div class="container">
-
-            <div class="section-title">
-                <h2>{{ __('frontend.homeStaffTitle') }}</h2>
-                <p>{{ __('frontend.homeStaffDesc') }}</p>
-            </div>
+        <div class="container text-center">
+                <h2 class="section-title">{{ __('frontend.homeStaffTitle') }}</h2>
+                <p class="section-subtitle mb-5">{{ __('frontend.homeStaffDesc') }}</p>
 
             <div class="row">
                 <?php

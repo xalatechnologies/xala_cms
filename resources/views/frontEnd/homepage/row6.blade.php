@@ -4,11 +4,10 @@ $Testimonials = Helper::Topics(11, 0, $TestimonialsLimit, 1);
 ?>
 @if(count($Testimonials)>0)
     <section id="testimonials" class="testimonials bg-light-green">
-        <div class="container">
-            <div class="section-title">
-                <h2>{{ __('frontend.homeTestimonialsTitle') }}</h2>
-                <p>{{ __('frontend.homeTestimonialsDesc') }}</p>
-            </div>
+        <div class="container text-center">
+                <h2 class="section-title">{{ __('frontend.homeTestimonialsTitle') }}</h2>
+                <p class="section-subtitle mb5">{{ __('frontend.homeTestimonialsDesc') }}</p>
+        
 
             <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
                 <div class="swiper-wrapper">

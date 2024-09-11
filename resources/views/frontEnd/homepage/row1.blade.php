@@ -109,6 +109,9 @@ $Technologies = Helper::Topics(16, 0, $ClientsLimit, 1);
                     }
 
                     $url = $TextBanner->seo_url_slug_en;
+
+                    $topic_fields = Helper::Topics(16, 0, $ClientsLimit, 1);
+                    echo $TextBanner->topic_fields;
                     ?>
 
             <div class="col-12 col-md-6 col-lg-4 mb-4 d-flex">
