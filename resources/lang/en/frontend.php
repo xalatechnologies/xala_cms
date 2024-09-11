@@ -91,5 +91,6 @@ return [
     'contactInformationDescription' => 'Have questions or need assistance? Start a live chat with us now and get immediate support!',
     'contactInformationOpeningHours' => 'Monday to Friday 08:00 AM to 05:00 PM',
     'footerSocialMediaLinks' => 'Connect with us',
+    'viewDetails' => 'View Details',
 ];
 ?>

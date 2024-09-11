@@ -15,10 +15,6 @@ $Portfolios = Helper::Topics(4, 0, $PortfoliosLimit, 1);
             <div class="col-12 d-flex justify-content-between align-items-center">
                 <!-- Title on the left and Pagination Arrows on the right -->
                 <p class="mb-0 section-subtitle">{{ __('frontend.ourWorkDesc') }}</p>
-                <div class="d-flex">
-                    <button class="btn btn-slider me-2"><i class="bi bi-arrow-left"></i></button>
-                    <button class="btn btn-slider"><i class="bi bi-arrow-right"></i></button>
-                </div>
             </div>
         </div>
 
@@ -33,31 +29,38 @@ $Portfolios = Helper::Topics(4, 0, $PortfoliosLimit, 1);
                         $title = $Portfolio->$title_var2;
                         $details = $Portfolio->$details_var2;
                     }
+                    $url = $Portfolio->seo_url_slug_en;
 
                     ?>
             <div class="col-12 col-md-6 col-lg-4 mb-4">
-                <div class="project-card">
+                
+                <div class="project-card p-2">
                     <img src="{{ URL::to('uploads/topics/'.$Portfolio->photo_file) }}" alt="{{ $title }}" class="img-fluid project-img">
-                    <div class="card-content p-3">
-                        <div>
-                            <h4>{{ $title }}</h4>
-                            <p>{{ $details }}</p>
-                            <div class="project-tags">
-                                @foreach($Portfolio->tags as $PortfolioTag)
-                                 <?php
-                                 $PortfolioTaged = Helper::Tag($PortfolioTag->tag_id);
+                    <div class="card-body p-3">
+                       
+                                <h5 class="step-title">{{ $title }}</h5>
+                                
+                                @if($Portfolio->fields->get(1))
+                                    <p class="text-muted">{{$Portfolio->fields->get(1)->field_value}}</p>
+                                @endif
+                                @if($Portfolio->fields->get(0))
+                                    <p>{{$Portfolio->fields->get(0)->field_value}}</p>
+                                @endif
+                            
 
-                   
-                    ?>
-                    @if($PortfolioTaged != null)
-                                    <span class="badge tag mb-1">{{ $PortfolioTaged->title }}</span>
-                                    @endif
-                                @endforeach
-                            </div>
-                        </div>
-                        <a href="#" class="arrow-link">
-                            <i class="bi bi-arrow-up-right"></i>
-                        </a>
+                                <div class="project-tags text-center pt-3">
+                                    @foreach($Portfolio->tags as $PortfolioTag)
+                                    <?php
+                                        $PortfolioTaged = Helper::Tag($PortfolioTag->tag_id);
+                                    ?>
+                                    @if($PortfolioTaged != null)
+                                        <span class="badge tag mb-1">{{ $PortfolioTaged->title }}</span>
+                                        @endif
+                                    @endforeach
+                                </div>
+                    </div>
+                    <div class="card-footer mt-auto text-center p-3">
+                        <a href="{{ "/portfolio/".$url }}" class="btn cta-button cta-button-primary"> {{ __('frontend.viewDetails') }}</a>
                     </div>
                 </div>
             </div>

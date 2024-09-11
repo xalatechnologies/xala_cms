@@ -14,6 +14,7 @@ use App\Models\Menu;
 use App\Models\Section;
 use App\Models\Setting;
 use App\Models\Topic;
+use App\Models\TopicField;
 use App\Models\Tag;
 use App\Models\TopicCategory;
 use App\Models\Webmail;
@@ -1022,6 +1023,11 @@ class Helper
     static function Tag($id)
     {
         return Tag::where([['status', 1]])->find($id);
+    }
+
+    static function CustomField($id)
+    {
+        return TopicField::where([['topic_id', $id]])->get();
     }
 
     static function colorHexToRGB($color, $opacity = 1): string
