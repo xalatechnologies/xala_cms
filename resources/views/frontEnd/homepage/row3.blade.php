@@ -3,17 +3,17 @@ $StaffLimit = 6; // 0 = all
 $Staff = Helper::Topics(Helper::GeneralWebmasterSettings("home_content5_section_id"), 0, $StaffLimit, 1);
 ?>
 @if(count($Staff)>0)
-    <section id="staff" class="staff bg-grey">
-        <div class="container text-center">
-                <h2 class="section-title">{{ __('frontend.homeStaffTitle') }}</h2>
-                <p class="section-subtitle mb-5">{{ __('frontend.homeStaffDesc') }}</p>
+<section id="staff" class="staff bg-grey">
+    <div class="container">
+        <h2 class="section-title">{{ __('frontend.homeStaffTitle') }}</h2>
+        <p class="section-subtitle text-center mb-5">{{ __('frontend.homeStaffDesc') }}</p>
 
-            <div class="row">
-                <?php
+        <div class="row">
+            <?php
                 $section_url = "";
                 ?>
-                @foreach($Staff->sortBy('id') as $Topic)
-                    <?php
+            @foreach($Staff->sortBy('id') as $Topic)
+            <?php
                     if ($Topic->$title_var != "") {
                         $title = $Topic->$title_var;
                     } else {
@@ -33,37 +33,46 @@ $Staff = Helper::Topics(Helper::GeneralWebmasterSettings("home_content5_section_
                         $require_mp3_player = 1;
                     }
                     ?>
-                    <div class="col-lg-6 mb-4">
-                        <div class="member d-flex align-items-start">
-                            @if($Topic->photo_file !="")
-                                <a href="{{ $topic_link_url }}">
-                                    <div class="pic">
-                                        <img class="img-fluid" loading="lazy"
-                                             src="{{ URL::to('uploads/topics/'.$Topic->photo_file) }}" width="120" height="120"
-                                             alt="{{ $title }}"/>
-                                    </div>
-                                </a>
-                            @endif
-                            <div class="member-info">
-                                <a href="{{ $topic_link_url }}"><h4>{!! $title !!}</h4></a>
-                                {{--Additional Feilds--}}
-                                @include("frontEnd.topic.fields",["cols"=>12,"Fields"=>@$Topic->webmasterSection->customFields->where("in_listing",true)])
-                                <span></span>
-
-                                @if(strip_tags($Topic->$details) !="")
-                                    <p>
-                                        {!! mb_substr(strip_tags($Topic->$details),0, 140)."..." !!}
-                                        <a href="{{ $topic_link_url }}">{{ __("frontend.moreDetails") }}</a>
-                                    </p>
-                                @endif
-                            </div>
+            <div class="col-lg-6 mb-4">
+                <div class="member d-flex align-items-start">
+                    @if($Topic->photo_file !="")
+                    <a href="{{ $topic_link_url }}">
+                        <div class="pic">
+                            <img class="img-fluid" loading="lazy" src="{{ URL::to('uploads/topics/'.$Topic->photo_file) }}" width="120" height="120" alt="{{ $title }}" />
                         </div>
+                    </a>
+                    @endif
+                    <div class="member-info">
+                        <a href="{{ $topic_link_url }}">
+                            <h4>{!! $title !!}</h4>
+                        </a>
+                        {{--Additional Feilds--}}
+                        @include("frontEnd.topic.fields",["cols"=>12,"Fields"=>@$Topic->webmasterSection->customFields->where("in_listing",true)])
+                        <span></span>
+
+                        @if(strip_tags($Topic->$details) !="")
+                        <p>
+                            {!! strip_tags($Topic->$details) !!}
+                        </p>
+                        
+                        <a class="mt-2" href="{{ $topic_link_url }}">{{ __("frontend.moreDetails") }}</a>
+
+                        @endif
+
+                        {{-- @if(strip_tags($Topic->$details) !="")
+                        <p>
+                            {!! mb_substr(strip_tags($Topic->$details),0, 140)."..." !!}
+                            <a href="{{ $topic_link_url }}">{{ __("frontend.moreDetails") }}</a>
+                        </p>
+                        @endif --}}
                     </div>
-                @endforeach
-
+                </div>
             </div>
+            @endforeach
 
-            
         </div>
-    </section>
+
+
+    </div>
+</section>
 @endif
