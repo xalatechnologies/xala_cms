@@ -48,7 +48,7 @@ $Portfolios = Helper::Topics(4, 0, $PortfoliosLimit, 1);
                                 @endif
                             
 
-                                <div class="project-tags text-center pt-3">
+                                <div class="project-tags text-center pt-2">
                                     @foreach($Portfolio->tags as $PortfolioTag)
                                     <?php
                                         $PortfolioTaged = Helper::Tag($PortfolioTag->tag_id);
@@ -60,7 +60,7 @@ $Portfolios = Helper::Topics(4, 0, $PortfoliosLimit, 1);
                                 </div>
                     </div>
                     <div class="card-footer mt-auto text-center p-3">
-                        <a href="{{ "/portfolio/".$url }}" class="btn cta-button cta-button-primary"> {{ __('frontend.viewDetails') }}</a>
+                        <a href="{{ "/case-studies/".$url }}" class="btn cta-button cta-button-primary"> {{ __('frontend.viewDetails') }}</a>
                     </div>
                 </div>
             </div>
@@ -70,7 +70,7 @@ $Portfolios = Helper::Topics(4, 0, $PortfoliosLimit, 1);
         <!-- View All Button -->
         <div class="row mt-5">
             <div class="col text-center">
-                <a href="/portfolio" class="btn cta-button cta-button-primary"> {{ __('frontend.viewMore') }}</a>
+                <a href="/case-studies" class="btn cta-button cta-button-primary"> {{ __('frontend.viewMore') }}</a>
             </div>
         </div>
     </div>

@@ -73,7 +73,7 @@
         <section class="breadcrumbs">
             <div class="container">
                 <div class="d-flex justify-content-between align-items-center">
-                    <h2>{!! (@$WebmasterSection->id ==1)?$title:$page_title !!}</h2>
+                    <h2>{{ $title }}</h2>
                     <ol>
                         <li><a href="{{ Helper::homeURL() }}">{{ __("backend.home") }}</a></li>
                         @if($webmaster_section_title !="")
@@ -249,7 +249,7 @@
                             @else
                                 {{--one photo--}}
                                 <div class="post-image">
-                                    @if($WebmasterSection->title_status)
+                                    {{-- @if($WebmasterSection->title_status)
                                         <div class="post-heading">
                                             <h1>
                                                 @if($Topic->icon !="")
@@ -258,9 +258,9 @@
                                                 {{ $title }}
                                             </h1>
                                         </div>
-                                    @endif
+                                    @endif --}}
                                     @if($Topic->photo_file !="")
-                                        <img src="{{ URL::to('uploads/topics/'.$Topic->photo_file) }}"  loading="lazy"
+                                        <img src="{{ URL::to('uploads/topics/'.$Topic->photo_file) }}" loading="lazy"
                                              alt="{{ $title }}" title="{{ $title }}" class="post-main-photo"/>
                                         <br>
                                     @endif
@@ -305,12 +305,7 @@
 
                         @include("frontEnd.topic.comments")
 
-                        @if(@$Topic->form_id >0)
-                            <br>
-                            @include('frontEnd.form',["FormSectionID"=>@$Topic->form_id])
-                        @elseif($WebmasterSection->order_status)
-                            @include("frontEnd.topic.order")
-                        @endif
+                       
 
                         @include("frontEnd.topic.related")
 
@@ -319,6 +314,12 @@
             </div>
         </section>
     </div>
+     @if(@$Topic->form_id >0)
+                            <br>
+                            @include('frontEnd.form',["FormSectionID"=>@$Topic->form_id])
+                        @elseif($WebmasterSection->order_status)
+                            @include("frontEnd.topic.order")
+                        @endif
     @include('frontEnd.layouts.popup',['Popup'=>@$Popup])
 @endsection
 @if (@in_array(@$WebmasterSection->type, [2]))

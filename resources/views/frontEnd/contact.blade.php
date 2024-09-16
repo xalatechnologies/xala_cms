@@ -32,10 +32,10 @@
     <section class="contact-us-section bg-grey py-5">
         <div class="container">
             <!-- Section Title -->
-            <div class="row mb-5">
+            <div class="row">
                 <div class="col-12 text-center">
-                    <h2 class="contact-title">{{ __('frontend.contactTitle') }}</h2>
-                    <p class="contact-subtitle">{{ __('frontend.contactDescription') }}</p>
+                   <h2 class="section-title">{{ __('frontend.contactTitle') }}</h2>
+                    <p class="section-subtitle mb-5">{{ __('frontend.contactDescription') }} </p>
                 </div>
             </div>
 
@@ -106,7 +106,7 @@
             </div>
         </div>
     </section>
-                @include("frontEnd.topic.maps")
+    @include("frontEnd.topic.maps")
 
     @include('frontEnd.layouts.popup',['Popup'=>@$Popup])
 @endsection

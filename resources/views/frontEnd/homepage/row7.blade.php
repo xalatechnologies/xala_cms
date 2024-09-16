@@ -76,7 +76,7 @@
             </div>
         </div>
     </section>
-                @include("frontEnd.topic.maps")
+             
 
 @push('after-scripts')
      <script type="text/javascript">
