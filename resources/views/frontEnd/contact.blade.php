@@ -95,10 +95,9 @@
 
                         <div class="contact-info-footer">
                             <div class="social-icons mt-4">
-                                <a href="#"><i class="bi bi-facebook"></i></a>
-                                <a href="#"><i class="bi bi-twitter"></i></a>
-                                <a href="#"><i class="bi bi-instagram"></i></a>
-                                <a href="#"><i class="bi bi-linkedin"></i></a>
+                                <a href="{{Helper::GeneralSiteSettings('social_link1')}}"><i class="bi bi-facebook"></i></a>
+                                <a href="{{Helper::GeneralSiteSettings('social_link2')}}"><i class="bi bi-twitter"></i></a>
+                                <a href="{{Helper::GeneralSiteSettings('social_link3')}}"><i class="bi bi-linkedin"></i></a>
                             </div>
                         </div>
                     </div>
