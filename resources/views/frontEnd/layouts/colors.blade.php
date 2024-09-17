@@ -230,7 +230,7 @@ $style_color4 = Helper::GeneralSiteSettings("style_color4");
     }
 
     .staff .member {
-        background: {{ Helper::GeneralSiteSettings("style_color4") }} !important;
+        background: {{ Helper::GeneralSiteSettings("style_color4") }};
         box-shadow: none;
     }
 
