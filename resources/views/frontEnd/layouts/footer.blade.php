@@ -51,7 +51,7 @@ if (!Helper::GeneralSiteSettings("style_subscribe")) {
         </div>
 
         <!-- Footer Links -->
-        <div class="footer-bottom d-none d-sm-block">
+        <div class="footer-bottom d-none">
             <ul class="footer-links">
              <?php
                         // Get list of footer menu links by group Id
