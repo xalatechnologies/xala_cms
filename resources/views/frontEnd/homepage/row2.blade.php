@@ -40,13 +40,10 @@ $Portfolios = Helper::Topics(4, 0, $PortfoliosLimit, 1);
                        
                                 <h5 class="step-title">{{ $title }}</h5>
                                 
-                                @if($Portfolio->fields->get(1))
+                                @if($Portfolio->fields->get(0))
                                     <p class="text-muted">{{$Portfolio->fields->get(1)->field_value}}</p>
                                 @endif
-                                @if($Portfolio->fields->get(0))
-                                    <p>{{$Portfolio->fields->get(0)->field_value}}</p>
-                                @endif
-                            
+                                <p>{{ $details }}</p>
 
                                 <div class="project-tags text-center pt-2">
                                     @foreach($Portfolio->tags as $PortfolioTag)
@@ -60,7 +57,7 @@ $Portfolios = Helper::Topics(4, 0, $PortfoliosLimit, 1);
                                 </div>
                     </div>
                     <div class="card-footer mt-auto text-center p-3">
-                        <a href="{{ "/case-studies/".$url }}" class="btn cta-button cta-button-primary"> {{ __('frontend.viewDetails') }}</a>
+                        <a href="{{ "case-studies/".$url }}" class="btn cta-button cta-button-primary"> {{ __('frontend.viewDetails') }}</a>
                     </div>
                 </div>
             </div>
@@ -70,7 +67,7 @@ $Portfolios = Helper::Topics(4, 0, $PortfoliosLimit, 1);
         <!-- View All Button -->
         <div class="row mt-5">
             <div class="col text-center">
-                <a href="/case-studies" class="btn cta-button cta-button-primary"> {{ __('frontend.viewMore') }}</a>
+                <a href="case-studies" class="btn cta-button cta-button-primary"> {{ __('frontend.viewMore') }}</a>
             </div>
         </div>
     </div>

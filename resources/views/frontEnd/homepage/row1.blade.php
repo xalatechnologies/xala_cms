@@ -112,7 +112,7 @@ $Technologies = Helper::Topics(16, 0, $ClientsLimit, 1);
                     ?>
 
             <div class="col-12 col-md-6 col-lg-4 mb-4 d-flex">
-                <a href="{{ "/services/".$url }}" class="service-card p-4 flex-grow-1"> 
+                <a href="{{ "services/".$url }}" class="service-card p-4 flex-grow-1"> 
                     @if($TextBanner->icon !="")
                     <div class="icon">
                         <i class="fa {{$TextBanner->icon}} fa-3x"></i>
@@ -121,9 +121,7 @@ $Technologies = Helper::Topics(16, 0, $ClientsLimit, 1);
                     <img src="{{ URL::to('uploads/banners/'.$BFile) }}" loading="lazy" alt="{{ $BTitle }}" />
                     @endif
                     <h5 class="service-title mt-3">{!! $BTitle !!}</h5>
-                    @if($TextBanner->fields->get(0))
-                        <p>{{$TextBanner->fields->get(0)->field_value}}</p>
-                    @endif
+                    <p>{{$BDetails}}</p>
                 </a>
             </div>
             @endforeach
