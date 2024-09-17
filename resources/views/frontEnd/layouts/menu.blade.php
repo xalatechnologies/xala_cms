@@ -82,7 +82,6 @@
                                         src="{{ asset('assets/dashboard/images/flags/'.$ActiveLanguage->icon.".svg") }}"
                                         alt=" {{ $ActiveLanguage->title }}" loading="lazy">
                                 @endif
-                                {{ $ActiveLanguage->title }}
                             </a>
                         @endforeach
                     </ul>
