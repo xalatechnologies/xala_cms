@@ -121,7 +121,9 @@ $Technologies = Helper::Topics(16, 0, $ClientsLimit, 1);
                     <img src="{{ URL::to('uploads/banners/'.$BFile) }}" loading="lazy" alt="{{ $BTitle }}" />
                     @endif
                     <h5 class="service-title mt-3">{!! $BTitle !!}</h5>
-                    <p>{{$BDetails}}</p>
+                    @if($TextBanner->fields->get(0))
+                        <p>{{$TextBanner->fields->get(0)->field_value}}</p>
+                    @endif
                 </a>
             </div>
             @endforeach
