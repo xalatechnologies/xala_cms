@@ -34,8 +34,7 @@ $Processes = Helper::Topics(17, 0, $ProcessLimit, 1);
                 <div class="agile-step">
                 <div class="step-circle step-circle-blue">{{ $ii }}
                             @if (!$loop->last)
-                            <i class="bi bi-arrow-right process-arrow"></i>
-                            @endif
+                            <i class="fas fa-angle-double-right process-arrow"></i>                            @endif
                             </div>
                     <h5 class="step-title">{{ $title }}</h5> 
                 </div>
