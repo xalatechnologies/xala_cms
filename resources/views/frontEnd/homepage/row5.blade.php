@@ -30,17 +30,16 @@ $Processes = Helper::Topics(17, 0, $ProcessLimit, 1);
                     }  
                     ?>
 
-            <div class="col-12 col-md-2 text-center">
+            <div class="col-6 col-md-2 text-center">
                 <div class="agile-step">
                 <div class="step-circle step-circle-blue">{{ $ii }}
                             @if (!$loop->last)
-                            <i class="fas fa-angle-double-right process-arrow"></i>                            @endif
+                                <i class="fas fa-arrow-right process-arrow"></i>                            
+                            @endif
                             </div>
                     <h5 class="step-title">{{ $title }}</h5> 
                 </div>
             </div>
-
-           
 
           
             <?php
@@ -53,3 +52,21 @@ $Processes = Helper::Topics(17, 0, $ProcessLimit, 1);
 </section>
 
 @endif
+
+@push('after-scripts')
+     <script type="text/javascript">
+document.addEventListener("DOMContentLoaded", function() {
+    if (window.innerWidth <= 768) { // Check if it's mobile
+        // Hide arrows for step 2 and step 4 on mobile
+        document.querySelectorAll('.agile-step').forEach(function(step, index) {
+            if (index === 1 || index === 3) { // 2nd and 4th step (index starts from 0)
+                let arrow = step.querySelector('.process-arrow');
+                if (arrow) {
+                    arrow.style.display = 'none';
+                }
+            }
+        });
+    }
+});
+</script>
+@endpush
