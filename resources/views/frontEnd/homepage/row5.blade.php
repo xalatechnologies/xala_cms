@@ -7,7 +7,7 @@ $Processes = Helper::Topics(17, 0, $ProcessLimit, 1);
 <section class="agile-process-section bg-grey py-5">
     <div class="container text-center">
         <!-- Section Title -->
-        <div class="row mb-5">
+        <div class="row">
             <div class="col-12">
                 <h2 class="agile-process-title">{{ __('frontend.homeProcessTitle') }}</h2>
             </div>
@@ -30,20 +30,16 @@ $Processes = Helper::Topics(17, 0, $ProcessLimit, 1);
                     }  
                     ?>
 
-            <div class="col-12 col-md-3 text-center mb-4">
+            <div class="col-12 col-md-2 text-center">
                 <div class="agile-step">
-                    <div class="step-circle step-circle-blue">{{ $ii }}</div>
-                    <h5 class="step-title">{{ $title }}</h5>
-                    <p class="step-description">{{ $desc }}</p>
+                    <div class="step-circle step-circle-blue">{{ $ii }}
+                        <i class="bi bi-arrow-right process-arrow"></i>
+                    </div>
+                    <h5 class="step-title">{{ $title }}</h5> 
                 </div>
             </div>
 
-            <!-- Arrow between steps -->
-            @if($ii != 3 and $ii != 6)
-            <div class="col-12 col-md-1 text-center d-none d-md-block">
-                <i class="bi bi-arrow-right process-arrow"></i>
-            </div>
-            @endif
+          
             <?php
                         $ii++;
                         ?>
