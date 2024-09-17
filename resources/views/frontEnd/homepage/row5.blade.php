@@ -14,7 +14,7 @@ $Processes = Helper::Topics(17, 0, $ProcessLimit, 1);
         </div>
 
         <!-- Process Steps -->
-        <div class="row justify-content-center align-items-center agile-steps">
+        <div class="row justify-content-center text-center process-flow">
             <?php
                     $ii = 1;
                     ?>
@@ -32,12 +32,16 @@ $Processes = Helper::Topics(17, 0, $ProcessLimit, 1);
 
             <div class="col-12 col-md-2 text-center">
                 <div class="agile-step">
-                    <div class="step-circle step-circle-blue">{{ $ii }}
-                        <i class="bi bi-arrow-right process-arrow"></i>
-                    </div>
+                <div class="step-circle step-circle-blue">{{ $ii }}
+                            @if (!$loop->last)
+                            <i class="bi bi-arrow-right process-arrow"></i>
+                            @endif
+                            </div>
                     <h5 class="step-title">{{ $title }}</h5> 
                 </div>
             </div>
+
+           
 
           
             <?php
