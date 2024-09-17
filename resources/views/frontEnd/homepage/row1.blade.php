@@ -42,7 +42,7 @@ $Technologies = Helper::Topics(16, 0, $ClientsLimit, 1);
                         }
                         ?>
             <div class="col-6 col-md-3 col-lg-2">
-                <img src="{{ URL::to('uploads/topics/'.$Client->photo_file) }}" class="client-logo img-fluid" data-bs-toggle="tooltip" data-bs-placement="bottom" title="{{ $title }}" loading="lazy" alt="{{ $title }}">
+                <img src="{{ URL::to('uploads/topics/'.$Client->photo_file) }}" class="client-logo img-fluid" loading="lazy" alt="{{ $title }}">
             </div>
             @endforeach
         </div>
