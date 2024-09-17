@@ -71,7 +71,7 @@
                                 src="{{ asset('assets/dashboard/images/flags/'.@Helper::currentLanguage()->icon.".svg") }}"
                                 alt="{{ @Helper::currentLanguage()->title }}" loading="lazy">
                         @endif
-                        {{ @Helper::currentLanguage()->title }}
+                        
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownLangBtn">
                         @foreach(Helper::languagesList() as $ActiveLanguage)
