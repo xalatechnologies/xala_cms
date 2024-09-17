@@ -1,5 +1,5 @@
  <!-- Contact Us Section -->
-    <section class="contact-us-section bg-grey py-5">
+    <section id="Contact" class="contact-us-section bg-grey py-5">
         <div class="container">
             <!-- Section Title -->
             <div class="row">

@@ -3,7 +3,7 @@ $TestimonialsLimit = 0; // 0 = all
 $Testimonials = Helper::Topics(11, 0, $TestimonialsLimit, 1);
 ?>
 @if(count($Testimonials)>0)
-    <section id="testimonials" class="testimonials bg-light-green">
+    <section id="Testimonials" id="testimonials" class="testimonials bg-light-green">
         <div class="container text-center">
                 <h2 class="section-title">{{ __('frontend.homeTestimonialsTitle') }}</h2>
                 <p class="section-subtitle mb5">{{ __('frontend.homeTestimonialsDesc') }}</p>

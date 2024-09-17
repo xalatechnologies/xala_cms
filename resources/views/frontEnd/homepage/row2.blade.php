@@ -4,7 +4,7 @@ $Portfolios = Helper::Topics(4, 0, $PortfoliosLimit, 1);
 ?>
 @if(count($Portfolios)>0)
 <!-- Work For Our Clients Section -->
-<section class="work-section py-5">
+<section id="CaseStudy" class="work-section py-5">
     <div class="container">
         <!-- Section Heading: Badge on one line, Title and Arrows on the next -->
         <div class="row mb-4">
