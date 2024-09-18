@@ -31,6 +31,7 @@ $Portfolios = Helper::Topics(4, 0, $PortfoliosLimit, 1);
                     $url_var = "seo_url_slug_" . @Helper::currentLanguage()->code;
                     $url = $Portfolio->$url_var;
 
+                    
                     ?>
             <div class="col-12 col-md-6 col-lg-4 mb-4">
                 
@@ -40,9 +41,7 @@ $Portfolios = Helper::Topics(4, 0, $PortfoliosLimit, 1);
                        
                                 <h5 class="step-title">{{ $title }}</h5>
                                 
-                                @if($Portfolio->fields->get(1))
-                                    <p class="text-muted">{{$Portfolio->fields->get(1)->field_value}}</p>
-                                @endif
+                            
                                 <p>{!! $details !!}</p>
 
                                 <div class="project-tags text-center pt-2">
