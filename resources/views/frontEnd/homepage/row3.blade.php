@@ -62,7 +62,7 @@ $Staff = Helper::Topics(Helper::GeneralWebmasterSettings("home_content5_section_
                         {{-- @if(strip_tags($Topic->$details) !="")
                         <p>
                             {!! mb_substr(strip_tags($Topic->$details),0, 140)."..." !!}
-                            <a href="{{ $topic_link_url }}">{{ __("frontend.moreDetails") }}</a>
+                           
                         </p>
                         @endif --}}
                     </div>

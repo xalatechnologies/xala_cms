@@ -112,7 +112,7 @@ $Technologies = Helper::Topics(16, 0, $ClientsLimit, 1);
                     ?>
 
             <div class="col-12 col-md-6 col-lg-4 mb-4 d-flex">
-                <a href="{{ "services/".$url }}" class="service-card p-4 flex-grow-1"> 
+                <div class="service-card p-4 flex-grow-1"> 
                     @if($TextBanner->icon !="")
                     <div class="icon">
                         <i class="fa {{$TextBanner->icon}} fa-3x"></i>
@@ -124,13 +124,13 @@ $Technologies = Helper::Topics(16, 0, $ClientsLimit, 1);
                     @if($TextBanner->fields->get(0))
                         <p>{{$TextBanner->fields->get(0)->field_value}}</p>
                     @endif
-                </a>
+                </div>
             </div>
             @endforeach
 
-        <div class="row mt-5">
+        <div class="row">
             <div class="col text-center">
-                <a href="/contact" class="btn cta-button cta-button-primary mt-4">{{ __('frontend.getintouch') }}</a>
+                <a href="/#Contact" class="btn cta-button cta-button-primary mt-4">{{ __('frontend.getintouch') }}</a>
             </div>
         </div>
 
