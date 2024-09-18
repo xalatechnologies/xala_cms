@@ -32,6 +32,13 @@ $Staff = Helper::Topics(Helper::GeneralWebmasterSettings("home_content5_section_
                     if (!@$require_mp3_player && $HomeSectionType == 3) {
                         $require_mp3_player = 1;
                     }
+
+                        if(@Helper::currentLanguage()->code == "en") {
+                            $role = $Topic->fields->get(0)->field_value;
+                        } else {
+                            $role = $Topic->fields->get(1)->field_value;
+                        }
+                
                     ?>
             <div class="col-lg-6 mb-4">
                 <div class="member d-flex align-items-start">
@@ -44,7 +51,7 @@ $Staff = Helper::Topics(Helper::GeneralWebmasterSettings("home_content5_section_
                         <a href="{{ $topic_link_url }}">
                             <h4>{!! $title !!}</h4>
                         </a>
-                        @include("frontEnd.topic.fields",["cols"=>12,"Fields"=>@$Topic->webmasterSection->customFields->where("in_listing",true)])
+                        <p>{!! $role !!}</p>
                         <span></span>
 
                         <p>
