@@ -90,3 +90,19 @@
         
     @endif
 @endif
+
+@push('after-scripts')
+<script type="text/javascript">
+document.addEventListener("DOMContentLoaded", function() {
+    if (window.innerWidth <= 768) {
+        // Close navbar-mobile on click
+        const menuItems = document.querySelectorAll('.navbar-mobile .menu-item'); // Adjust selector if necessary
+        menuItems.forEach(function(item) {
+            item.addEventListener('click', function() {
+                document.querySelector('.navbar-mobile').classList.remove('active'); // Adjust class if needed
+            });
+        });
+    }
+});
+</script>
+@endpush
