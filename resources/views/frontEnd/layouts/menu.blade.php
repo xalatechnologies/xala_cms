@@ -95,7 +95,6 @@
 <script type="text/javascript">
 document.addEventListener("DOMContentLoaded", function() {
     if (window.innerWidth <= 768) {
-        console.log("hdsf");
         const menuItems = document.querySelectorAll('.nav-link'); // Adjust selector if necessary
         menuItems.forEach(function(item) {
             item.addEventListener('click', function() {
