@@ -22,17 +22,14 @@ $Portfolios = Helper::Topics(4, 0, $PortfoliosLimit, 1);
         <div class="row">
             @foreach($Portfolios->sortBy('id') as $Portfolio)
             <?php
-                    if ($Portfolio->$title_var != "") {
-                        $title = $Portfolio->$title_var;
-                        $details = $Portfolio->$details_var;
-                    } else {
-                        $title = $Portfolio->$title_var2;
-                        $details = $Portfolio->$details_var2;
-                    }
+                    $title_var = "title_" . @Helper::currentLanguage()->code;
+                    $details_var = "details_" . @Helper::currentLanguage()->code;
+                    
+                    $title = $Portfolio->$title_var;
+                    $details = $Portfolio->$details_var;
                     
                     $url_var = "seo_url_slug_" . @Helper::currentLanguage()->code;
                     $url = $Portfolio->$url_var;
-                    
 
                     ?>
             <div class="col-12 col-md-6 col-lg-4 mb-4">
