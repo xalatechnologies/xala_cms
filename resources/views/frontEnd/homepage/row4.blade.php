@@ -37,7 +37,7 @@ $Technologies = Helper::Topics(16, 0, $TechnologiesLimit, 1);
         <div class="row mt-3">
             <div class="col-lg-12">
                 <div class="more-btn">
-                    <a href="/#Contact" class="btn cta-button cta-button-primary"> {{ __('frontend.getintouch') }}</a>
+                    <a href="#Contact" class="btn cta-button cta-button-primary"> {{ __('frontend.getintouch') }}</a>
                 </div>
             </div>
         </div>

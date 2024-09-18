@@ -43,7 +43,7 @@ $Portfolios = Helper::Topics(4, 0, $PortfoliosLimit, 1);
                                 @if($Portfolio->fields->get(0))
                                     <p class="text-muted">{{$Portfolio->fields->get(2)->field_value}}</p>
                                 @endif
-                                <p>{{ $details }}</p>
+                                <p>{!! $details !!}</p>
 
                                 <div class="project-tags text-center pt-2">
                                     @foreach($Portfolio->tags as $PortfolioTag)

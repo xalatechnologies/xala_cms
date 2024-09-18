@@ -121,15 +121,14 @@ $Technologies = Helper::Topics(16, 0, $ClientsLimit, 1);
                     <img src="{{ URL::to('uploads/banners/'.$BFile) }}" loading="lazy" alt="{{ $BTitle }}" />
                     @endif
                     <h5 class="service-title mt-3">{!! $BTitle !!}</h5>
-                   
-                        <p>{!! $BDetails !!}</p>
+                    <p>{!! $BDetails !!}</p>
                 </div>
             </div>
             @endforeach
 
         <div class="row">
             <div class="col text-center">
-                <a href="/#Contact" class="btn cta-button cta-button-primary mt-4">{{ __('frontend.getintouch') }}</a>
+                <a href="#Contact" class="btn cta-button cta-button-primary mt-4">{{ __('frontend.getintouch') }}</a>
             </div>
         </div>
 

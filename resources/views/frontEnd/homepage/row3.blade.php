@@ -50,14 +50,12 @@ $Staff = Helper::Topics(Helper::GeneralWebmasterSettings("home_content5_section_
                         @include("frontEnd.topic.fields",["cols"=>12,"Fields"=>@$Topic->webmasterSection->customFields->where("in_listing",true)])
                         <span></span>
 
-                        @if(strip_tags($Topic->$details) !="")
                         <p>
-                            {!! strip_tags($Topic->$details) !!}
+                            {!! $details !!}
                         </p>
                         
                         <a class="mt-2" href="{{ $topic_link_url }}">{{ __("frontend.moreDetails") }}</a>
 
-                        @endif
 
                         {{-- @if(strip_tags($Topic->$details) !="")
                         <p>
