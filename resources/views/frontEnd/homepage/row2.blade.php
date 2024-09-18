@@ -29,7 +29,10 @@ $Portfolios = Helper::Topics(4, 0, $PortfoliosLimit, 1);
                         $title = $Portfolio->$title_var2;
                         $details = $Portfolio->$details_var2;
                     }
-                    $url = $Portfolio->seo_url_slug_en;
+                    
+                    $url_var = "seo_url_slug_" . @Helper::currentLanguage()->code;
+                    $url = $Portfolio->$url_var;
+                    
 
                     ?>
             <div class="col-12 col-md-6 col-lg-4 mb-4">
@@ -57,7 +60,7 @@ $Portfolios = Helper::Topics(4, 0, $PortfoliosLimit, 1);
                                 </div>
                     </div>
                     <div class="card-footer mt-auto text-center p-3">
-                        <a href="{{ "case-studies/".$url }}" class="btn cta-button cta-button-primary"> {{ __('frontend.viewDetails') }}</a>
+                        <a href="{{ @Helper::currentLanguage()->code."/case-studies/".$url }}" class="btn cta-button cta-button-primary"> {{ __('frontend.viewDetails') }}</a>
                     </div>
                 </div>
             </div>
