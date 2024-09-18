@@ -20,9 +20,9 @@ $Staff = Helper::Topics(Helper::GeneralWebmasterSettings("home_content5_section_
                         $title = $Topic->$title_var2;
                     }
                     if ($Topic->$details_var != "") {
-                        $details = $details_var;
+                        $details = $Topic->$details_var;
                     } else {
-                        $details = $details_var2;
+                        $details = $Topic->$details_var2;
                     }
                     if ($section_url == "") {
                         $section_url = Helper::sectionURL($Topic->webmaster_id);
@@ -36,17 +36,14 @@ $Staff = Helper::Topics(Helper::GeneralWebmasterSettings("home_content5_section_
             <div class="col-lg-6 mb-4">
                 <div class="member d-flex align-items-start">
                     @if($Topic->photo_file !="")
-                    <a href="{{ $topic_link_url }}">
                         <div class="pic">
                             <img class="img-fluid" loading="lazy" src="{{ URL::to('uploads/topics/'.$Topic->photo_file) }}" width="120" height="120" alt="{{ $title }}" />
                         </div>
-                    </a>
                     @endif
                     <div class="member-info">
                         <a href="{{ $topic_link_url }}">
                             <h4>{!! $title !!}</h4>
                         </a>
-                        {{--Additional Feilds--}}
                         @include("frontEnd.topic.fields",["cols"=>12,"Fields"=>@$Topic->webmasterSection->customFields->where("in_listing",true)])
                         <span></span>
 
@@ -54,15 +51,6 @@ $Staff = Helper::Topics(Helper::GeneralWebmasterSettings("home_content5_section_
                             {!! $details !!}
                         </p>
                         
-                        <a class="mt-2" href="{{ $topic_link_url }}">{{ __("frontend.moreDetails") }}</a>
-
-
-                        {{-- @if(strip_tags($Topic->$details) !="")
-                        <p>
-                            {!! mb_substr(strip_tags($Topic->$details),0, 140)."..." !!}
-                           
-                        </p>
-                        @endif --}}
                     </div>
                 </div>
             </div>
