@@ -64,11 +64,11 @@ $Portfolios = Helper::Topics(4, 0, $PortfoliosLimit, 1);
         </div>
 
         <!-- View All Button -->
-        <div class="row">
+        <!-- <div class="row">
             <div class="col text-center">
                 <a href="case-studies" class="btn cta-button cta-button-primary"> {{ __('frontend.viewMore') }}</a>
             </div>
-        </div>
+        </div> -->
     </div>
 </section>
 @endif
