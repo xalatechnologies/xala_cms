@@ -48,9 +48,7 @@ $Staff = Helper::Topics(Helper::GeneralWebmasterSettings("home_content5_section_
                         </div>
                     @endif
                     <div class="member-info">
-                        <a href="{{ $topic_link_url }}">
-                            <h4>{!! $title !!}</h4>
-                        </a>
+                       <h4>{!! $title !!}</h4>
                         <p>{!! $role !!}</p>
                         <span></span>
 
