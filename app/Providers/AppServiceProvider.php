@@ -20,18 +20,14 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Bootstrap any application services.
      */
-    public function boot(UrlGenerator $url): void
+    public function boot(): void
     {
         // Fore HTTPs if enabled to fix any problems with mixed contents
         if (!empty(@$_SERVER['https']) || @$_SERVER['HTTPS'] == 'on' || (!empty(@$_SERVER['HTTP_X_FORWARDED_PROTO']) && @$_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https')) {
             URL::forceScheme('https');
         }
-        
-        if(env('APP_ENV') !== 'local')
-        {
-            $url->forceSchema('https');
-        }
-    
+
+        URL::forceScheme('https');
 
         Paginator::useBootstrap();
         Schema::defaultStringLength(191);
