@@ -37,11 +37,7 @@
             </a>
             <br><br>
             <label>{!!  __('backend.apiDocs') !!} : </label>
-            <div class="form-control">
-                <a href="http://smartfordesign.net/smartend/documentation/api.html"
-                   class="text-info" target="_blank">http://smartfordesign.net/smartend/documentation/api.html</a>
-            </div>
-
+           
         </div>
     </div>
 </div>

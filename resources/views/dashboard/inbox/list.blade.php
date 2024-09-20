@@ -191,7 +191,7 @@
                     <hr>
                     @if( $connectEmailAddress !="" )
                         <a class="nav-link" target="_blank"
-                           href="<?php echo 'http' . ($useHTTPS ? 's' : '') . '://' . $connectDomainURL . ':' . ($useHTTPS ? '2096' : '2095') . '/login/?user=' . $connectEmailAddress . '&pass=' . $connectEmailPassword . '&failurl=http://' . $connectDomainURL; ?>">
+                           href="<?php echo 'http' . ($useHTTPS ? 's' : '') . '://' . $connectDomainURL . ':' . ($useHTTPS ? '2096' : '2095') . '/login/?user=' . $connectEmailAddress . '&pass=' . $connectEmailPassword . '&failurl=https://' . $connectDomainURL; ?>">
                             {!! __('backend.openWebmail') !!}
                             @if($nMsgCount >0 )
                                 <span class="label warn m-l-xs">{{ $nMsgCount }}</span>

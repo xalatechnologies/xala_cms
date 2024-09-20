@@ -183,7 +183,7 @@
                                     class="col-sm-2 form-control-label">{!!  __('backend.bannerLinkUrl') !!} {!! @Helper::languageName($ActiveLanguage) !!}
                                 </label>
                                 <div class="col-sm-10">
-                                    {!! Form::text('link_'.@$ActiveLanguage->code,$Banners->{'link_'.@$ActiveLanguage->code}, array('placeholder' => 'http://www.site.com','class' => 'form-control','maxlength'=>191, 'dir'=>'ltr')) !!}
+                                    {!! Form::text('link_'.@$ActiveLanguage->code,$Banners->{'link_'.@$ActiveLanguage->code}, array('placeholder' => 'https://www.site.com','class' => 'form-control','maxlength'=>191, 'dir'=>'ltr')) !!}
                                 </div>
                             </div>
                         @endif
