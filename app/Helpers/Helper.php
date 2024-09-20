@@ -180,7 +180,7 @@ class Helper
     {
         if (config('smartend.geoip_status')) {
             $visitor_ip = $_SERVER['REMOTE_ADDR'];
-            $current_page_full_link = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+            $current_page_full_link = "https://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
             $page_load_time = round((microtime(true) - LARAVEL_START), 8);
 
             // Check is it already saved today to visitors?
