@@ -57,7 +57,7 @@ class SettingsSeeder extends Seeder
         $settings->notify_messages_status = "1";
         $settings->notify_comments_status = "1";
         $settings->notify_orders_status = "1";
-        $settings->site_url = "http://www.sitename.com/";
+        $settings->site_url = "https://www.sitename.com/";
         $settings->site_status = "1";
         $settings->close_msg = "<div class='text-center'><img src='/assets/frontend/images/maintenance.gif' width='400'><h1>Website Under Maintenance</h1><h4>Coming Soon</h4></div>";
         $settings->social_link1 = "#";

@@ -8,6 +8,8 @@
     @include('frontEnd.layouts.colors')
     @yield('headInclude')
     @stack('after-styles')
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+
     @if(Helper::GeneralSiteSettings("css")!="")
         <style type="text/css">
             {!! Helper::GeneralSiteSettings("css") !!}

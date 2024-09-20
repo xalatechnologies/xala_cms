@@ -342,7 +342,7 @@ class Helper
     static function SocialShare($social, $title)
     {
         $shareLink = "";
-        $URL = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+        $URL = "https://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 
         switch ($social) {
             case "facebook":
@@ -989,7 +989,7 @@ class Helper
     {
         $target = ' target="_blank"';
         $str = preg_replace('@((https?://)?([-\w]+\.[-\w\.]+)+\w(:\d+)?(/([-\w/_\.~]*(\?\S+)?)?)*)@', '<a href="$1" ' . $target . '>$1</a>', $str);
-        $str = preg_replace('/<a\s[^>]*href\s*=\s*"((?!https?:\/\/)[^"]*)"[^>]*>/i', '<a href="http://$1" ' . $target . '>', $str);
+        $str = preg_replace('/<a\s[^>]*href\s*=\s*"((?!https?:\/\/)[^"]*)"[^>]*>/i', '<a href="https://$1" ' . $target . '>', $str);
         return $str;
     }
 
