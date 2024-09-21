@@ -13,7 +13,7 @@
             <div class="row align-items-stretch contact-us-row g-0">
                 <!-- Contact Form -->
                 <div class="col-lg-6">
-                        {{Form::open(['route'=>['contactPageSubmit'],'method'=>'POST','class'=>'php-email-form contact-form p-5 bg-white h-100 rounded','id'=>'contactForm', 'novalidate' => true])}}
+                        {{Form::open(['route'=>['contactPageSubmit'],'method'=>'POST','class'=>'php-email-form contact-form p-5 bg-white h-100 rounded','id'=>'contactForm'])}}
                         <div class="row">
                             <div class="col-md-12 form-group">
                             {!! Form::text('contact_name', "", array('placeholder' => __('frontend.yourName'), 'class' => 'form-control', 'id' => 'contact_name', 'required' => 'required', 'pattern' => '[A-Za-z\s]{3,}', 'title' => 'Name must be at least 3 characters and contain only letters and spaces')) !!}
@@ -138,8 +138,6 @@
         }
     });
 </script>
-
-
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const form = document.getElementById('contactForm');
