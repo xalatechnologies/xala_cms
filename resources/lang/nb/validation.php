@@ -137,7 +137,11 @@ return [
     'uploaded' => 'The :attribute failed to upload.',
     'url' => 'The :attribute must be a valid URL.',
     'uuid' => 'The :attribute must be a valid UUID.',
-
+    'required' => ':attribute feltet er påkrevd.',
+    'email' => 'Vennligst skriv inn en gyldig e-postadresse.',
+    'minlength' => ':attribute må være minst :min tegn.',
+    'phone' => 'Telefonnummeret må være mellom 10 og 15 sifre.',
+    
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines

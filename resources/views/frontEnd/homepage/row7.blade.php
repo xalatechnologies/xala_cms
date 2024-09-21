@@ -87,56 +87,58 @@
 
 @push('after-scripts')
 <script>
+    var validationMessages = @json([
+        'required' => __('validation.required'),
+        'email' => __('validation.email'),
+        'minlength' => __('validation.minlength', ['min' => 5]),
+        'phone' => __('validation.phone'),
+    ]);
+</script>
+<script>
     document.getElementById('contactForm').addEventListener('submit', function (event) {
-        let form = this;
         let isValid = true;
 
-        // Clear any previous error messages
+        // Clear previous error messages
         document.querySelectorAll('.error-message').forEach(function (el) {
             el.textContent = '';
         });
 
         // Name validation
-        let name = form.querySelector('#contact_name');
-        if (!name.value.match(/^[A-Za-z\s]{3,}$/)) {
+        let name = document.getElementById('contact_name');
+        if (name.value.trim() === '') {
             isValid = false;
-            document.getElementById('error-contact_name').textContent = 'Please enter a valid name (at least 3 characters).';
+            document.getElementById('error-contact_name').textContent = validationMessages.required.replace(':attribute', 'Name');
         }
 
         // Email validation
-        let email = form.querySelector('#contact_email');
-        if (!email.value.match(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/i)) {
+        let email = document.getElementById('contact_email');
+        let emailPattern = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/i;
+        if (!emailPattern.test(email.value)) {
             isValid = false;
-            document.getElementById('error-contact_email').textContent = 'Please enter a valid email address (e.g., example@domain.com).';
+            document.getElementById('error-contact_email').textContent = validationMessages.email;
         }
 
         // Phone validation
-        let phone = form.querySelector('#contact_phone');
-        if (!phone.value.match(/^[0-9]{10,15}$/)) {
+        let phone = document.getElementById('contact_phone');
+        let phonePattern = /^[0-9]{8,15}$/;
+        if (!phonePattern.test(phone.value)) {
             isValid = false;
-            document.getElementById('error-contact_phone').textContent = 'Please enter a valid phone number (10-15 digits).';
+            document.getElementById('error-contact_phone').textContent = validationMessages.phone;
         }
 
         // Subject validation
-        let subject = form.querySelector('#contact_subject');
+        let subject = document.getElementById('contact_subject');
         if (subject.value.length < 5) {
             isValid = false;
-            document.getElementById('error-contact_subject').textContent = 'Subject must be at least 5 characters long.';
+            document.getElementById('error-contact_subject').textContent = validationMessages.minlength.replace(':attribute', 'Subject');
         }
 
-        // Message validation
-        let message = form.querySelector('#contact_message');
-        if (message.value.length < 10) {
-            isValid = false;
-            document.getElementById('error-contact_message').textContent = 'Message must be at least 10 characters long.';
-        }
-
-        // If the form is invalid, prevent submission
         if (!isValid) {
             event.preventDefault();
         }
     });
 </script>
+
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
