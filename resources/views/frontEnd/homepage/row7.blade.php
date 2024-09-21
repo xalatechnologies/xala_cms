@@ -16,20 +16,20 @@
                         {{Form::open(['route'=>['contactPageSubmit'],'method'=>'POST','class'=>'php-email-form contact-form p-5 bg-white h-100 rounded','id'=>'contactForm'])}}
                         <div class="row">
                             <div class="col-md-12 form-group">
-                                {!! Form::text('contact_name',"", array('placeholder' => __('frontend.yourName'),'class' => 'form-control','id'=>'contact_name','required'=>'required')) !!}
+                                {!! Form::text('contact_name',"", array('placeholder' => __('frontend.yourName'),'class' => 'form-control','id'=>'contact_name','required'=>'required', 'pattern' => '[A-Za-z\s]{3,}', 'title' => 'Name must be at least 3 characters and contain only letters and spaces')) !!}
                             </div>
                             <div class="col-md-12 form-group mt-3 mt-md-0">
                                 {!! Form::email('contact_email',"", array('placeholder' => __('frontend.yourEmail'),'class' => 'form-control','id'=>'contact_email','required'=>'required')) !!}
                             </div>
                             <div class="col-md-12 form-group mt-3 mt-md-0">
-                                {!! Form::text('contact_phone',"", array('placeholder' => __('frontend.phone'),'class' => 'form-control','id'=>'contact_phone','required'=>'required')) !!}
+                                {!! Form::text('contact_phone',"", array('placeholder' => __('frontend.phone'),'class' => 'form-control','id'=>'contact_phone','required'=>'required', 'pattern' => '[0-9]{10,15}', 'title' => 'Phone number should be between 10-15 digits')) !!}
                             </div>
                         </div>
                         <div class="form-group mt-3">
-                            {!! Form::text('contact_subject',"", array('placeholder' => __('frontend.subject'),'class' => 'form-control','id'=>'contact_subject','required'=>'required')) !!}
+                                {!! Form::text('contact_subject',"", array('placeholder' => __('frontend.subject'),'class' => 'form-control','id'=>'contact_subject','required'=>'required', 'minlength' => '5', 'title' => 'Subject must be at least 5 characters')) !!}
                         </div>
                         <div class="form-group mt-3">
-                            {!! Form::textarea('contact_message','', array('placeholder' => __('frontend.message'),'class' => 'form-control','id'=>'contact_message','rows'=>'10','required'=>'required')) !!}
+                            {!! Form::textarea('contact_message','', array('placeholder' => __('frontend.message'),'class' => 'form-control','id'=>'contact_message','rows'=>'10','required'=>'required', 'minlength' => '10', 'title' => 'Message must be at least 10 characters')) !!}
                         </div>
 
                         @if(config('smartend.nocaptcha_status'))
@@ -74,10 +74,86 @@
                 </div>
             </div>
         </div>
-    </section>
-             
+    </section> 
 
 @push('after-scripts')
+<script>
+    document.getElementById('contactForm').addEventListener('submit', function (event) {
+        let isValid = true;
+        let form = this;
+
+        // Custom validation logic
+        let name = form.querySelector('#contact_name');
+        let email = form.querySelector('#contact_email');
+        let phone = form.querySelector('#contact_phone');
+        let subject = form.querySelector('#contact_subject');
+        let message = form.querySelector('#contact_message');
+
+        // Name validation
+        if (!name.value.match(/^[A-Za-z\s]{3,}$/)) {
+            isValid = false;
+            name.setCustomValidity('Please enter a valid name (at least 3 characters, letters and spaces only).');
+        } else {
+            name.setCustomValidity('');
+        }
+
+        // Email validation (already handled by type="email")
+        if (!email.value) {
+            isValid = false;
+            email.setCustomValidity('Please enter a valid email.');
+        } else {
+            email.setCustomValidity('');
+        }
+
+        // Phone validation
+        if (!phone.value.match(/^[0-9]{10,15}$/)) {
+            isValid = false;
+            phone.setCustomValidity('Please enter a valid phone number (10-15 digits).');
+        } else {
+            phone.setCustomValidity('');
+        }
+
+        // Subject validation
+        if (subject.value.length < 5) {
+            isValid = false;
+            subject.setCustomValidity('Subject must be at least 5 characters.');
+        } else {
+            subject.setCustomValidity('');
+        }
+
+        // Message validation
+        if (message.value.length < 10) {
+            isValid = false;
+            message.setCustomValidity('Message must be at least 10 characters.');
+        } else {
+            message.setCustomValidity('');
+        }
+
+        // If form is not valid, prevent submission
+        if (!isValid) {
+            event.preventDefault();
+        }
+    });
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const form = document.getElementById('contactForm');
+        const inputs = form.querySelectorAll('input, textarea');
+
+        inputs.forEach(function(input) {
+            input.addEventListener('input', function () {
+                if (input.checkValidity()) {
+                    input.classList.remove('is-invalid');
+                    input.classList.add('is-valid');
+                } else {
+                    input.classList.remove('is-valid');
+                    input.classList.add('is-invalid');
+                }
+            });
+        });
+    });
+</script>
+
      <script type="text/javascript">
         $(document).ready(function () {
             $('#contactForm').submit(function (evt) {
@@ -107,28 +183,6 @@
                 });
                 return false;
             });
-        });
-
-        var iti = window.intlTelInput(document.querySelector("#contact_phone"), {
-            showSelectedDialCode: true,
-            countrySearch: true,
-            initialCountry: "auto",
-            separateDialCode: true,
-            hiddenInput: function() {
-                return {
-                    phone: "contact_phone_full",
-                    country: "contact_phone_country_code"
-                };
-            },
-            geoIpLookup: function (callback) {
-                $.get('https://ipinfo.io', function () {
-                }, "jsonp").always(function (resp) {
-                    var countryCode = (resp && resp.country) ? resp.country : "us";
-                    callback(countryCode.toLowerCase());
-                    iti.setCountry(countryCode.toLowerCase());
-                });
-            },
-            utilsScript: "{{ URL::asset('assets/frontend/vendor/intl-tel-input/js/utils.js') }}?v={{ Helper::system_version() }}",
         });
     </script>
 @endpush
