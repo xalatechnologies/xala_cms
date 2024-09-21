@@ -13,24 +13,33 @@
             <div class="row align-items-stretch contact-us-row g-0">
                 <!-- Contact Form -->
                 <div class="col-lg-6">
-                        {{Form::open(['route'=>['contactPageSubmit'],'method'=>'POST','class'=>'php-email-form contact-form p-5 bg-white h-100 rounded','id'=>'contactForm'])}}
+                        {{Form::open(['route'=>['contactPageSubmit'],'method'=>'POST','class'=>'php-email-form contact-form p-5 bg-white h-100 rounded','id'=>'contactForm', 'novalidate' => true])}}
                         <div class="row">
                             <div class="col-md-12 form-group">
-                                {!! Form::text('contact_name',"", array('placeholder' => __('frontend.yourName'),'class' => 'form-control','id'=>'contact_name','required'=>'required', 'pattern' => '[A-Za-z\s]{3,}', 'title' => 'Name must be at least 3 characters and contain only letters and spaces')) !!}
-                            </div>
-                            <div class="col-md-12 form-group mt-3 mt-md-0">
-                                {!! Form::email('contact_email',"", array('placeholder' => __('frontend.yourEmail'),'class' => 'form-control','id'=>'contact_email','required'=>'required')) !!}
-                            </div>
-                            <div class="col-md-12 form-group mt-3 mt-md-0">
-                                {!! Form::text('contact_phone',"", array('placeholder' => __('frontend.phone'),'class' => 'form-control','id'=>'contact_phone','required'=>'required', 'pattern' => '[0-9]{10,15}', 'title' => 'Phone number should be between 10-15 digits')) !!}
-                            </div>
+                            {!! Form::text('contact_name', "", array('placeholder' => __('frontend.yourName'), 'class' => 'form-control', 'id' => 'contact_name', 'required' => 'required', 'pattern' => '[A-Za-z\s]{3,}', 'title' => 'Name must be at least 3 characters and contain only letters and spaces')) !!}
+                            <span class="error-message" id="error-contact_name"></span>
                         </div>
+
+                        <div class="col-md-12 form-group mt-3 mt-md-0">
+                            {!! Form::email('contact_email', "", array('placeholder' => __('frontend.yourEmail'), 'class' => 'form-control', 'id' => 'contact_email', 'required' => 'required', 'pattern' => '[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$', 'title' => 'Please enter a valid email address (e.g., example@domain.com).')) !!}
+                            <span class="error-message" id="error-contact_email"></span>
+                        </div>
+
+                        <div class="col-md-12 form-group mt-3 mt-md-0">
+                            {!! Form::text('contact_phone', "", array('placeholder' => __('frontend.phone'), 'class' => 'form-control', 'id' => 'contact_phone', 'required' => 'required', 'pattern' => '[0-9]{10,15}', 'title' => 'Phone number should be between 10-15 digits')) !!}
+                            <span class="error-message" id="error-contact_phone"></span>
+                        </div>
+
                         <div class="form-group mt-3">
-                                {!! Form::text('contact_subject',"", array('placeholder' => __('frontend.subject'),'class' => 'form-control','id'=>'contact_subject','required'=>'required', 'minlength' => '5', 'title' => 'Subject must be at least 5 characters')) !!}
+                            {!! Form::text('contact_subject', "", array('placeholder' => __('frontend.subject'), 'class' => 'form-control', 'id' => 'contact_subject', 'required' => 'required', 'minlength' => '5', 'title' => 'Subject must be at least 5 characters')) !!}
+                            <span class="error-message" id="error-contact_subject"></span>
                         </div>
+
                         <div class="form-group mt-3">
-                            {!! Form::textarea('contact_message','', array('placeholder' => __('frontend.message'),'class' => 'form-control','id'=>'contact_message','rows'=>'10','required'=>'required', 'minlength' => '10', 'title' => 'Message must be at least 10 characters')) !!}
+                            {!! Form::textarea('contact_message', '', array('placeholder' => __('frontend.message'), 'class' => 'form-control', 'id' => 'contact_message', 'rows' => '10', 'required' => 'required', 'minlength' => '10', 'title' => 'Message must be at least 10 characters')) !!}
+                            <span class="error-message" id="error-contact_message"></span>
                         </div>
+
 
                         @if(config('smartend.nocaptcha_status'))
                             <div class="form-group mb-3">
@@ -79,62 +88,56 @@
 @push('after-scripts')
 <script>
     document.getElementById('contactForm').addEventListener('submit', function (event) {
-        let isValid = true;
         let form = this;
+        let isValid = true;
 
-        // Custom validation logic
-        let name = form.querySelector('#contact_name');
-        let email = form.querySelector('#contact_email');
-        let phone = form.querySelector('#contact_phone');
-        let subject = form.querySelector('#contact_subject');
-        let message = form.querySelector('#contact_message');
+        // Clear any previous error messages
+        document.querySelectorAll('.error-message').forEach(function (el) {
+            el.textContent = '';
+        });
 
         // Name validation
+        let name = form.querySelector('#contact_name');
         if (!name.value.match(/^[A-Za-z\s]{3,}$/)) {
             isValid = false;
-            name.setCustomValidity('Please enter a valid name (at least 3 characters, letters and spaces only).');
-        } else {
-            name.setCustomValidity('');
+            document.getElementById('error-contact_name').textContent = 'Please enter a valid name (at least 3 characters).';
         }
 
-        // Email validation (already handled by type="email")
-        if (!email.value) {
+        // Email validation
+        let email = form.querySelector('#contact_email');
+        if (!email.value.match(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/i)) {
             isValid = false;
-            email.setCustomValidity('Please enter a valid email.');
-        } else {
-            email.setCustomValidity('');
+            document.getElementById('error-contact_email').textContent = 'Please enter a valid email address (e.g., example@domain.com).';
         }
 
         // Phone validation
+        let phone = form.querySelector('#contact_phone');
         if (!phone.value.match(/^[0-9]{10,15}$/)) {
             isValid = false;
-            phone.setCustomValidity('Please enter a valid phone number (10-15 digits).');
-        } else {
-            phone.setCustomValidity('');
+            document.getElementById('error-contact_phone').textContent = 'Please enter a valid phone number (10-15 digits).';
         }
 
         // Subject validation
+        let subject = form.querySelector('#contact_subject');
         if (subject.value.length < 5) {
             isValid = false;
-            subject.setCustomValidity('Subject must be at least 5 characters.');
-        } else {
-            subject.setCustomValidity('');
+            document.getElementById('error-contact_subject').textContent = 'Subject must be at least 5 characters long.';
         }
 
         // Message validation
+        let message = form.querySelector('#contact_message');
         if (message.value.length < 10) {
             isValid = false;
-            message.setCustomValidity('Message must be at least 10 characters.');
-        } else {
-            message.setCustomValidity('');
+            document.getElementById('error-contact_message').textContent = 'Message must be at least 10 characters long.';
         }
 
-        // If form is not valid, prevent submission
+        // If the form is invalid, prevent submission
         if (!isValid) {
             event.preventDefault();
         }
     });
 </script>
+
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const form = document.getElementById('contactForm');
