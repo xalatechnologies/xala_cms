@@ -1,9 +1,8 @@
 <?php
+$ClientsLimit = 12;
 $Clients = Helper::Topics(9, 0, $ClientsLimit, 1);
-$TechnologiesLimit = 12; ; // 0 = all
-$Technologies = Helper::Topics(16, 0, $TechnologiesLimit, 1);
 ?>
-@if(count($Technologies)>0)
+@if(count($Clients)>0)
 <section id="Tools" class="tools-section py-5 bg-light-green">
     <div class="container">
         <!-- Section Title -->
@@ -24,7 +23,6 @@ $Technologies = Helper::Topics(16, 0, $TechnologiesLimit, 1);
                         $title = $Client->$title_var2;
                     }
 
-                     $url = $Client->seo_url_slug_en;
                     ?>
 
             <div class="col-6 col-md-4 col-lg-2 mb-4">
