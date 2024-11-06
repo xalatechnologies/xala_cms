@@ -9,8 +9,8 @@
         ?>
 
         @include('frontEnd.layouts.slider')
-        @include('frontEnd.homepage.row8')
         @include('frontEnd.homepage.row1')
+        @include('frontEnd.homepage.row8')
         @include('frontEnd.homepage.row4')
         @include('frontEnd.homepage.row5')
         @include('frontEnd.homepage.row2')
