@@ -1,5 +1,5 @@
 <?php
-$ClientsLimit = 12;
+$ClientsLimit = 16;
 $Clients = Helper::Topics(9, 0, $ClientsLimit, 1);
 ?>
 @if(count($Clients)>0)
@@ -31,13 +31,6 @@ $Clients = Helper::Topics(9, 0, $ClientsLimit, 1);
                 </div>
                 </div>
             @endforeach
-        </div>
-        <div class="row mt-3">
-            <div class="col-lg-12">
-                <div class="more-btn">
-                    <a href="#Contact" class="btn cta-button cta-button-primary"> {{ __('frontend.getintouch') }}</a>
-                </div>
-            </div>
         </div>
     </div>
 </section>
