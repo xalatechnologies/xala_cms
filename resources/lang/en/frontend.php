@@ -82,6 +82,8 @@ return [
     'servicesMsg' => 'Integrate Design, Technology, and Business Thinking for scalable solutions.',
     'technologiesTitle' => 'Tools and Technologies We Work On',
     'technologiesdesc' => 'Our expertise in these renowned technologies powers your business.',
+    'clientsTitle' => 'Tools and Technologies We Work On',
+    'clientsDesc' => 'Our expertise in these renowned technologies powers your business.',
     'homeProcessTitle' => 'Our Work Process Model',
     'ourWork' => 'Case Studies',
     'ourWorkDesc' => 'Discover Our Recent Assignments Through Case Studies',

@@ -77,6 +77,8 @@ return array (
   'subscribeToOurNewsletterError' => 'You Already Subscribed!!',
   'technologiesTitle' => 'Verktøy og teknologier vi jobber med',
   'technologiesdesc' => 'Vår ekspertise innen disse anerkjente teknologiene driver virksomheten din fremover.',
+  'clientsTitle' => 'Tools and Technologies We Work On',
+  'clientsDesc' => 'Our expertise in these renowned technologies powers your business.',
   'toTop' => 'to Top',
   'viewDetails' => 'Vis detaljer',
   'viewMore' => 'Vis mer',
