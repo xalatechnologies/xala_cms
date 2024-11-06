@@ -3,7 +3,7 @@ $ClientsLimit = 12;
 $Clients = Helper::Topics(9, 0, $ClientsLimit, 1);
 ?>
 @if(count($Clients)>0)
-<section id="Tools" class="tools-section bg-grey py-5">
+<section id="Tools" class="services-section py-5">
     <div class="container">
         <!-- Section Title -->
         <div class="row mb-4 text-center">
