@@ -13,7 +13,7 @@ $page_form = @$HomePage->form;
 <?php
         $form_url = Helper::sectionURL($page_form->id);
         ?>
-<div class="text-center mt-3">
+<div class="text-center mt-3 bg-grey">
     <a href="{{ $form_url }}" class="btn btn-lg btn-primary">
         <i class="fa-solid fa-send-o"></i> {{ __('backend.submit') }} {!! $page_form->{"title_".@Helper::currentLanguage()->code} !!}
     </a>
