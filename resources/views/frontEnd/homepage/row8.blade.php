@@ -27,7 +27,7 @@ $Clients = Helper::Topics(9, 0, $ClientsLimit, 1);
 
             <div class="col-6 col-md-4 col-lg-2 mb-4">
                 <div class="tool-card text-center p-3">
-                    <img src="{{ URL::to('uploads/topics/'.$Client->photo_file) }}" alt="{{ $title }}" class="img-fluid tool-logo mb-2">
+                    <img src="{{ URL::to('uploads/topics/'.$Client->photo_file) }}" alt="{{ $title }}" class="img-fluid mb-2">
                 </div>
                 </div>
             @endforeach
