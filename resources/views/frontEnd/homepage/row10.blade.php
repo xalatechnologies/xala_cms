@@ -81,11 +81,11 @@ $Technologies = Helper::Topics(16, 0, $ClientsLimit, 1);
             </div>
             @endforeach
 
-        <div class="row">
+        {{-- <div class="row">
             <div class="col text-center">
                 <a href="#Contact" class="btn cta-button cta-button-primary mt-4">{{ __('frontend.getintouch') }}</a>
             </div>
-        </div>
+        </div> --}}
 
         </div>
 </section>
